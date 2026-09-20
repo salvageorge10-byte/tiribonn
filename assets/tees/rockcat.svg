@@ -1,0 +1,18 @@
+<svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<g id="rc-cat">
+<path d="M0 30 -8 8 6 20 14 4 24 20 32 8 24 30c6 6 10 14 10 22 0 16-15 26-34 26S-34 68-34 52c0-8 4-16 10-22z" fill="#161410"/>
+<circle cx="10" cy="46" r="2.4" fill="#fff"/>
+<circle cx="24" cy="46" r="2.4" fill="#fff"/>
+<rect x="-20" y="70" width="40" height="46" rx="6" fill="#161410"/>
+<rect x="-26" y="74" width="14" height="36" rx="5" fill="#161410"/>
+<rect x="12" y="74" width="14" height="36" rx="5" fill="#161410"/>
+</g>
+</defs>
+<g fill="#161410" stroke="none">
+<use href="#rc-cat" x="46" y="20"/>
+<use href="#rc-cat" x="100" y="24"/>
+<use href="#rc-cat" x="154" y="20"/>
+</g>
+<text x="110" y="200" font-family="'Kalam', cursive" font-weight="700" font-size="30" text-anchor="middle" fill="#161410" letter-spacing="2">ROCKCAT</text>
+</svg>

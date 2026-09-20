@@ -1,0 +1,10 @@
+# backups locales (git ya cumple esa funcion)
+.backups/
+
+# configuracion de herramientas locales
+.impeccable/
+
+# sistema
+Thumbs.db
+desktop.ini
+.DS_Store

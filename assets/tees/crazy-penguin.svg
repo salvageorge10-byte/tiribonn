@@ -1,0 +1,12 @@
+<svg viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
+<g fill="none" stroke="#161410" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+<path d="M60 96c0-18 16-30 32-30h4c8-10 20-14 30-10-2 8-6 14-12 18 8 4 14 12 16 22l14 8-16 6c-2 10-10 18-20 20l-40 8-30-10c-8-4-12-14-8-22z" fill="#fff"/>
+<circle cx="94" cy="90" r="9" fill="#fff"/>
+<circle cx="94" cy="90" r="3.4" fill="#161410"/>
+<path d="M96 100c6 2 12 0 16-4" stroke-width="4"/>
+<circle cx="120" cy="82" r="2.4" fill="#161410"/>
+<circle cx="130" cy="86" r="2.4" fill="#161410"/>
+<circle cx="118" cy="72" r="2.4" fill="#161410"/>
+</g>
+<text x="100" y="196" font-family="'Kalam', cursive" font-weight="700" font-size="20" text-anchor="middle" fill="#161410">Crazy Penguin</text>
+</svg>

@@ -1,0 +1,10 @@
+<svg viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
+<g fill="none" stroke="#E23B2E" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+<path d="M62 96 44 54c16 6 26 4 34-6 6 10 14 14 22 14s16-4 22-14c8 10 18 12 34 6l-18 42c8 8 12 20 12 32 0 30-26 48-56 48s-56-18-56-48c0-12 4-24 12-32z" fill="#E23B2E" fill-opacity=".14"/>
+<circle cx="82" cy="128" r="7" fill="#E23B2E" stroke="none"/>
+<circle cx="118" cy="128" r="7" fill="#E23B2E" stroke="none"/>
+<path d="M78 152c8 8 36 8 44 0" stroke-width="5"/>
+<path d="M78 152l4 12M100 154v14M122 152l-4 12" stroke-width="5"/>
+</g>
+<text x="100" y="204" font-family="'Kalam', cursive" font-weight="700" font-size="20" text-anchor="middle" fill="#E23B2E">Devil Inside</text>
+</svg>

@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TIRIBON — Arte, confort y color para tu día a día</title>
+<meta name="description" content="Toallas de microfibra de alto rendimiento y camisetas infantiles de algodón 100% orgánico, ilustradas en exclusiva por el artista Lucas Baró.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Permanent+Marker&family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a class="skip" href="#camisetas">Ir a las camisetas</a>
+
+<header class="hdr" id="hdr">
+  <div class="hdr-in">
+    <a href="#inicio" class="mark" aria-label="TIRIBON — inicio">
+      <img src="public/tiribon-logo.png" alt="TIRIBON" width="1111" height="233">
+    </a>
+
+    <nav class="nav" id="nav" aria-label="Navegación principal">
+      <a href="#toallas">Toallas</a>
+      <a href="#camisetas">Camisetas</a>
+      <a href="#arte">El arte</a>
+      <a href="#nosotros">Nosotros</a>
+      <a href="#info">Cómo comprar</a>
+    </nav>
+
+    <div class="hdr-end">
+      <button class="icon-btn" id="search-toggle" aria-label="Buscar diseños" aria-expanded="false" aria-controls="search-bar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+          <circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/>
+        </svg>
+      </button>
+      <button class="cart-btn" id="cart-toggle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8Z"/>
+          <path d="M9 8V6.5a3 3 0 0 1 6 0V8"/>
+        </svg>
+        <span class="cart-label">Mi pedido</span>
+        <span class="cart-n" id="cart-count">0</span>
+      </button>
+      <button class="burger" id="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="sheet">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <div class="search-bar" id="search-bar" hidden>
+    <div class="search-in">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+        <circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/>
+      </svg>
+      <input type="search" id="search-input" placeholder="Buscar diseño: rockcat, pingüino, ballena…" aria-label="Buscar diseños">
+      <button type="button" id="search-clear" aria-label="Cerrar búsqueda">Cerrar</button>
+    </div>
+    <p class="search-msg" id="search-msg" role="status"></p>
+  </div>
+</header>
+
+<div class="sheet" id="sheet" aria-hidden="true">
+  <nav aria-label="Navegación móvil">
+    <a href="#camisetas">Camisetas</a>
+    <a href="#toallas">Toallas</a>
+    <a href="#arte">El arte</a>
+    <a href="#nosotros">Nosotros</a>
+    <a href="#info">Cómo comprar</a>
+  </nav>
+  <a class="sheet-wa" href="#" data-wa="Hola! Quiero consultar por TIRIBON.">Escríbenos por WhatsApp</a>
+</div>
+
+<!-- CARRITO -->
+<div class="scrim" id="cart-scrim"></div>
+<aside class="drawer" id="cart-drawer" aria-hidden="true" aria-label="Tu pedido">
+  <div class="drawer-top">
+    <h2>Tu pedido</h2>
+    <button class="x" id="cart-close" aria-label="Cerrar pedido">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <div class="drawer-body" id="cart-items"></div>
+  <div class="drawer-foot">
+    <div class="drawer-sum">
+      <span id="cart-summary-count">0 prendas</span>
+      <span class="dim">Precio a confirmar</span>
+    </div>
+    <p class="drawer-note">No cobramos desde la web. Preparas tu lista aquí y cerramos talla, stock y precio por WhatsApp.</p>
+    <button class="wa-btn" id="cart-wa" disabled>Enviar pedido por WhatsApp</button>
+  </div>
+</aside>
+
+<!-- FICHA DE PRODUCTO -->
+<div class="scrim" id="qv-scrim"></div>
+<div class="qv" id="qv" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="qv-name">
+  <button class="x qv-x" id="qv-close" aria-label="Cerrar ficha">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+  </button>
+  <figure class="qv-media" id="qv-media"><img id="qv-img" src="images/rockcat.jpg" alt=""></figure>
+  <div class="qv-info">
+    <p class="qv-kicker" id="qv-kicker">Camiseta infantil de algodón orgánico</p>
+    <h3 id="qv-name"></h3>
+    <p class="qv-desc" id="qv-desc"></p>
+    <p class="qv-sub">Características clave</p>
+    <ul class="qv-specs" id="qv-specs">
+      <li>100% algodón orgánico certificado</li>
+      <li>Suave al tacto, transpirable y resistente</li>
+      <li>Tintas ecológicas a base de agua, seguras para la piel</li>
+      <li>Ilustración exclusiva de autor por <b>Lucas Baró</b>, firmada sobre la prenda</li>
+      <li>Tallas por rango de edad — se confirman por WhatsApp</li>
+    </ul>
+    <details class="qv-care" id="qv-care">
+      <summary>Cuidado de la prenda</summary>
+      <ul>
+        <li>Lava del revés para cuidar el estampado</li>
+        <li>Agua fría, ciclo suave</li>
+        <li>No planches sobre el dibujo</li>
+        <li>Evita la secadora: la prenda dura más</li>
+      </ul>
+    </details>
+    <div class="qv-buy">
+      <div class="stepper">
+        <button type="button" id="qv-minus" aria-label="Restar unidad">−</button>
+        <span id="qv-qty">1</span>
+        <button type="button" id="qv-plus" aria-label="Sumar unidad">+</button>
+      </div>
+      <button type="button" class="wa-btn" id="qv-add">Añadir al pedido</button>
+    </div>
+  </div>
+</div>
+
+<main>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="inicio">
+  <div class="hero-text">
+    <svg class="d-sun" viewBox="0 0 120 120" aria-hidden="true">
+      <circle cx="16" cy="60" r="44" fill="#FBE9A8"/>
+      <g stroke="#F6CE55" stroke-width="7" stroke-linecap="round">
+        <path d="M74 22 88 12"/><path d="M84 52h18"/><path d="M76 90l14 10"/>
+      </g>
+    </svg>
+
+    <h1>Arte, confort y color<br class="brk">para tu <span class="hl">día a día</span></h1>
+
+    <svg class="d-spark" viewBox="0 0 90 120" aria-hidden="true">
+      <g stroke="#2F7DD1" stroke-width="8" stroke-linecap="round">
+        <path d="M22 44 34 10"/><path d="M52 40 60 16"/>
+      </g>
+      <g stroke="#F6CE55" stroke-width="8" stroke-linecap="round">
+        <path d="M14 82 26 58"/><path d="M48 78 62 60"/>
+      </g>
+    </svg>
+
+    <p class="hero-sub">Toallas de microfibra de alto rendimiento y camisetas de algodón orgánico para niños, ilustradas en exclusiva por el artista <b>Lucas Baró</b>.</p>
+
+    <div class="hero-cta">
+      <a class="pill dark" href="#camisetas">Explorar colección
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+      </a>
+      <a class="pill ghost" href="#arte">Descubrir el arte de Lucas Baró</a>
+    </div>
+
+    <ul class="feats">
+      <li>
+        <span class="f-ic green" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 4c0 9-5 14-13 14H4c0-9 5-14 13-14Z"/><path d="M4 20c3-5 7-8 12-9"/></svg>
+        </span>
+        <span class="f-tx">Diseños<br>exclusivos</span>
+      </li>
+      <li>
+        <span class="f-ic pink" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7.5-4.6-7.5-9.7A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7C19.5 15.4 12 20 12 20Z"/></svg>
+        </span>
+        <span class="f-tx">Algodón 100%<br>orgánico certificado</span>
+      </li>
+      <li>
+        <span class="f-ic blue" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 4 2.5 5.2 5.5.8-4 3.9 1 5.6-5-2.7-5 2.7 1-5.6-4-3.9 5.5-.8Z"/></svg>
+        </span>
+        <span class="f-tx">Producción<br>consciente</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="hero-vis">
+    <span class="blob blob-b" aria-hidden="true"></span>
+    <span class="blob blob-p" aria-hidden="true"></span>
+    <figure class="hero-fig">
+      <img src="images/rockcat.jpg" alt="Niño con la camiseta rosa TIRIBON del diseño Rockcat" fetchpriority="high">
+    </figure>
+    <p class="note note-1">Más juego<br>más historias</p>
+    <p class="note note-2">Infancia en<br>modo creativo</p>
+  </div>
+</section>
+
+<!-- ============ TOALLAS ============ -->
+<section class="tow" id="toallas">
+  <div class="tow-in">
+    <div class="tow-text">
+      <p class="kick inv">La otra línea</p>
+      <h2 class="tow-title">Toallas de microfibra</h2>
+      <p class="tow-lead">Ligeras, de secado ultra rápido y sin ocupar espacio. Diseñadas para acompañarte al mar, la piscina o tus entrenamientos sin renunciar al estilo. Cada toalla lleva plasmada una obra original de Lucas Baró.</p>
+      <ul class="chips">
+        <li>Ultra absorbente</li>
+        <li>Secado rápido</li>
+        <li>Compacta y ligera</li>
+        <li>Estampación digital de alta definición</li>
+        <li>Diseño exclusivo de autor</li>
+      </ul>
+      <a class="btn-solid lemon" href="#" data-wa="Hola! Quiero consultar por las toallas de microfibra de TIRIBON.">Consultar toallas</a>
+      <p class="tow-note">Las fotos de producto de esta línea todavía no están publicadas: abajo ves el diseño que lleva cada toalla.</p>
+    </div>
+    <div class="tow-art" id="tow-art" aria-hidden="true"></div>
+  </div>
+
+  <div class="tow-shop">
+    <p class="tow-shop-head">Diseños de la temporada</p>
+    <div class="tow-grid" id="tow-grid"></div>
+  </div>
+</section>
+
+<!-- ============ CAMISETAS ============ -->
+<section class="shop" id="camisetas">
+  <div class="shop-head">
+    <div>
+      <p class="kick">Colección</p>
+      <h2>Camisetas infantiles de algodón orgánico</h2>
+    </div>
+    <p>La delicadeza que la piel de los más pequeños merece, combinada con la creatividad que despierta su imaginación. Algodón 100% orgánico certificado y estampados exclusivos llenos de vida.</p>
+  </div>
+  <div class="shop-grid" id="shop-grid"></div>
+  <p class="shop-foot">Preparas el pedido aquí y lo cerramos por WhatsApp, donde confirmamos talla, stock y precio.</p>
+</section>
+
+<!-- ============ POR QUÉ ELEGIRNOS ============ -->
+<section class="why" aria-label="Por qué elegirnos">
+  <div class="why-in">
+    <div class="why-i">
+      <h3>Diseños exclusivos</h3>
+      <p>Ilustraciones únicas de la mano de Lucas Baró.</p>
+    </div>
+    <div class="why-i">
+      <h3>Algodón orgánico</h3>
+      <p>Cuidado respetuoso e hipoalergénico para los niños.</p>
+    </div>
+    <div class="why-i">
+      <h3>Secado rápido</h3>
+      <p>Microfibra compacta de alta absorción en las toallas.</p>
+    </div>
+    <div class="why-i">
+      <h3>Producción consciente</h3>
+      <p>Materiales sostenibles y procesos responsables.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EL ARTE ============ -->
+<section class="prints" id="arte">
+  <div class="prints-head">
+    <div>
+      <p class="kick">El arte detrás de TIRIBON</p>
+      <h2>Un lienzo que se lleva puesto</h2>
+    </div>
+    <p>TIRIBON no es solo una marca. Cada uno de nuestros diseños nace del trazo, el color y la visión creativa de <b>Lucas Baró</b>, y convierte prendas y piezas cotidianas en ediciones especiales con carácter propio.</p>
+  </div>
+  <div class="prints-strip" id="prints-strip"></div>
+  <p class="prints-cap">Los cuatro diseños de la temporada, ampliados de las fotos de producto. La firma del artista viaja impresa junto al dibujo.</p>
+</section>
+
+<!-- ============ NOSOTROS ============ -->
+<section class="about" id="nosotros">
+  <div class="about-in">
+    <h2>La unión entre arte, sostenibilidad y aventura</h2>
+
+    <div class="about-cols">
+      <div class="about-lead">
+        <p>En TIRIBON creemos que los objetos y prendas cotidianas pueden transmitir arte y alegría. Nacemos con el propósito de ofrecer productos funcionales de alta calidad enriquecidos con una identidad visual única.</p>
+      </div>
+
+      <div class="about-body">
+        <div class="about-b">
+          <h3>Nuestra filosofía</h3>
+          <p>Unimos la expresividad de las artes plásticas con textiles seleccionados cuidadosamente. Nos enfocamos en dos líneas: toallas de microfibra de alto rendimiento, pensadas para el movimiento y la aventura, y camisetas de algodón orgánico para niños, diseñadas para cuidar su piel y estimular su imaginación.</p>
+        </div>
+        <div class="about-b">
+          <h3>El artista: Lucas Baró</h3>
+          <p>Todas nuestras colecciones llevan su impronta. Sus obras aportan dinamismo, color e historia a cada pieza. Trabajar con diseños exclusivos nos permite ofrecer artículos de edición limitada que destacan del resto.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INFO ============ -->
+<section class="info" id="info">
+  <div class="how">
+    <h2>Cómo se compra</h2>
+    <ol>
+      <li><b>Eliges</b> los diseños y los añades al pedido.</li>
+      <li><b>Se guarda</b> aunque cierres la página.</li>
+      <li><b>Cerramos por WhatsApp</b>: tallas, stock, precio y envío.</li>
+    </ol>
+  </div>
+
+  <div class="faq" id="faq">
+    <h2>Preguntas</h2>
+    <div class="faq-i">
+      <button class="faq-q" type="button" aria-expanded="false">¿Por qué no hay precios en la web?</button>
+      <div class="faq-a"><div><p>Porque todavía no tenemos pagos online. Preferimos confirmarte precio y disponibilidad al momento, así no te encuentras con un dato desactualizado.</p></div></div>
+    </div>
+    <div class="faq-i">
+      <button class="faq-q" type="button" aria-expanded="false">¿Qué tallas manejáis?</button>
+      <div class="faq-a"><div><p>Por rango de edad. Cuando nos escribas te confirmamos qué hay disponible del diseño que elegiste.</p></div></div>
+    </div>
+    <div class="faq-i">
+      <button class="faq-q" type="button" aria-expanded="false">¿El algodón orgánico es más delicado?</button>
+      <div class="faq-a"><div><p>No, aguanta el lavado habitual igual que cualquier algodón. Lo que cambia es el cultivo, sin pesticidas ni químicos agresivos, y las tintas, que son ecológicas a base de agua.</p></div></div>
+    </div>
+    <div class="faq-i">
+      <button class="faq-q" type="button" aria-expanded="false">¿Los diseños se reponen?</button>
+      <div class="faq-a"><div><p>Trabajamos con ediciones limitadas. Cuando un diseño de Lucas Baró se agota, no lo reponemos: llega uno nuevo en su lugar.</p></div></div>
+    </div>
+    <div class="faq-i">
+      <button class="faq-q" type="button" aria-expanded="false">¿Hacéis envíos?</button>
+      <div class="faq-a"><div><p>Escríbenos y lo vemos según tu zona: te confirmamos opciones y coste antes de cerrar el pedido.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACTO ============ -->
+<footer class="end" id="contacto">
+  <div class="end-top">
+    <h2>¿Te ayudamos a elegir?</h2>
+    <p>Escríbenos y te confirmamos talla, stock y precio en el momento. También te avisamos cuando sale una colección nueva de Lucas Baró.</p>
+    <a class="btn-solid lemon big" href="#" data-wa="Hola! Quiero consultar por las camisetas y toallas de TIRIBON.">Escríbenos por WhatsApp</a>
+    <p class="end-slogan">TIRIBON — Arte en movimiento, confort para los tuyos.</p>
+  </div>
+  <div class="end-word" aria-hidden="true"><span class="w1">tiri</span><span class="w2">bon</span></div>
+  <div class="end-base">
+    <span>© 2026 TIRIBON</span>
+    <span>Ilustraciones exclusivas de Lucas Baró</span>
+  </div>
+</footer>
+
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>

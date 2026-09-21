@@ -17,7 +17,7 @@
 <header class="hdr" id="hdr">
   <div class="hdr-in">
     <a href="#inicio" class="mark" aria-label="TIRIBON — inicio">
-      <img src="public/tiribon-logo.png" alt="TIRIBON" width="1111" height="233">
+      <img src="public/tiribon-logo-480.webp" alt="TIRIBON" width="480" height="101">
     </a>
 
     <nav class="nav" id="nav" aria-label="Navegación principal">
@@ -25,7 +25,6 @@
       <a href="#camisetas">Camisetas</a>
       <a href="#arte">El arte</a>
       <a href="#nosotros">Nosotros</a>
-      <a href="#info">Cómo comprar</a>
     </nav>
 
     <div class="hdr-end">
@@ -83,115 +82,52 @@
   <div class="drawer-body" id="cart-items"></div>
   <div class="drawer-foot">
     <div class="drawer-sum">
-      <span id="cart-summary-count">0 prendas</span>
+      <span id="cart-summary-count">0 artículos</span>
       <span class="dim">Precio a confirmar</span>
     </div>
-    <p class="drawer-note">No cobramos desde la web. Preparas tu lista aquí y cerramos talla, stock y precio por WhatsApp.</p>
+    <p class="drawer-note">No cobramos desde la web. Preparas tu lista aquí y cerramos talla o medida, stock y precio por WhatsApp.</p>
     <button class="wa-btn" id="cart-wa" disabled>Enviar pedido por WhatsApp</button>
   </div>
 </aside>
-
-<!-- FICHA DE PRODUCTO -->
-<div class="scrim" id="qv-scrim"></div>
-<div class="qv" id="qv" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="qv-name">
-  <button class="x qv-x" id="qv-close" aria-label="Cerrar ficha">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
-  </button>
-  <figure class="qv-media" id="qv-media"><img id="qv-img" src="images/rockcat.jpg" alt=""></figure>
-  <div class="qv-info">
-    <p class="qv-kicker" id="qv-kicker">Camiseta infantil de algodón orgánico</p>
-    <h3 id="qv-name"></h3>
-    <p class="qv-desc" id="qv-desc"></p>
-    <p class="qv-sub">Características clave</p>
-    <ul class="qv-specs" id="qv-specs">
-      <li>100% algodón orgánico certificado</li>
-      <li>Suave al tacto, transpirable y resistente</li>
-      <li>Tintas ecológicas a base de agua, seguras para la piel</li>
-      <li>Ilustración exclusiva de autor por <b>Lucas Baró</b>, firmada sobre la prenda</li>
-      <li>Tallas por rango de edad — se confirman por WhatsApp</li>
-    </ul>
-    <details class="qv-care" id="qv-care">
-      <summary>Cuidado de la prenda</summary>
-      <ul>
-        <li>Lava del revés para cuidar el estampado</li>
-        <li>Agua fría, ciclo suave</li>
-        <li>No planches sobre el dibujo</li>
-        <li>Evita la secadora: la prenda dura más</li>
-      </ul>
-    </details>
-    <div class="qv-buy">
-      <div class="stepper">
-        <button type="button" id="qv-minus" aria-label="Restar unidad">−</button>
-        <span id="qv-qty">1</span>
-        <button type="button" id="qv-plus" aria-label="Sumar unidad">+</button>
-      </div>
-      <button type="button" class="wa-btn" id="qv-add">Añadir al pedido</button>
-    </div>
-  </div>
-</div>
 
 <main>
 
 <!-- ============ HERO ============ -->
 <section class="hero" id="inicio">
   <div class="hero-text">
-    <svg class="d-sun" viewBox="0 0 120 120" aria-hidden="true">
-      <circle cx="16" cy="60" r="44" fill="#FBE9A8"/>
-      <g stroke="#F6CE55" stroke-width="7" stroke-linecap="round">
-        <path d="M74 22 88 12"/><path d="M84 52h18"/><path d="M76 90l14 10"/>
-      </g>
-    </svg>
+    <p class="hero-kick">Tiribon <span aria-hidden="true">&#215;</span> Lucas Baró</p>
 
-    <h1>Arte, confort y color<br class="brk">para tu <span class="hl">día a día</span></h1>
+    <h1>Arte para llevar.<br><span class="hl">Color para disfrutar.</span></h1>
 
-    <svg class="d-spark" viewBox="0 0 90 120" aria-hidden="true">
-      <g stroke="#2F7DD1" stroke-width="8" stroke-linecap="round">
-        <path d="M22 44 34 10"/><path d="M52 40 60 16"/>
-      </g>
-      <g stroke="#F6CE55" stroke-width="8" stroke-linecap="round">
-        <path d="M14 82 26 58"/><path d="M48 78 62 60"/>
-      </g>
-    </svg>
-
-    <p class="hero-sub">Toallas de microfibra de alto rendimiento y camisetas de algodón orgánico para niños, ilustradas en exclusiva por el artista <b>Lucas Baró</b>.</p>
+    <p class="hero-sub">Toallas de microfibra ilustradas y camisetas de algodón orgánico para niños, creadas junto al artista <b>Lucas Baró</b>.</p>
 
     <div class="hero-cta">
-      <a class="pill dark" href="#camisetas">Explorar colección
+      <a class="pill dark" href="#toallas">Ver toallas
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
       </a>
-      <a class="pill ghost" href="#arte">Descubrir el arte de Lucas Baró</a>
+      <a class="pill ghost" href="#camisetas">Conocer la colección</a>
     </div>
 
-    <ul class="feats">
-      <li>
-        <span class="f-ic green" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 4c0 9-5 14-13 14H4c0-9 5-14 13-14Z"/><path d="M4 20c3-5 7-8 12-9"/></svg>
-        </span>
-        <span class="f-tx">Diseños<br>exclusivos</span>
-      </li>
-      <li>
-        <span class="f-ic pink" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7.5-4.6-7.5-9.7A4.3 4.3 0 0 1 12 7.6a4.3 4.3 0 0 1 7.5 2.7C19.5 15.4 12 20 12 20Z"/></svg>
-        </span>
-        <span class="f-tx">Algodón 100%<br>orgánico certificado</span>
-      </li>
-      <li>
-        <span class="f-ic blue" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 4 2.5 5.2 5.5.8-4 3.9 1 5.6-5-2.7-5 2.7 1-5.6-4-3.9 5.5-.8Z"/></svg>
-        </span>
-        <span class="f-tx">Producción<br>consciente</span>
-      </li>
-    </ul>
+    <p class="hero-hand">Más juego<br>más historias<br>un mundo más colorido</p>
   </div>
 
   <div class="hero-vis">
-    <span class="blob blob-b" aria-hidden="true"></span>
-    <span class="blob blob-p" aria-hidden="true"></span>
+    <svg class="d-rays" viewBox="0 0 120 104" aria-hidden="true">
+      <g stroke="#F6CE55" stroke-width="10" stroke-linecap="round" fill="none">
+        <path d="M10 30 26 12"/>
+        <path d="M45 8 49 32"/>
+        <path d="M76 14 70 38"/>
+        <path d="M101 31 87 49"/>
+        <path d="M113 58 92 64"/>
+      </g>
+    </svg>
+
     <figure class="hero-fig">
-      <img src="images/rockcat.jpg" alt="Niño con la camiseta rosa TIRIBON del diseño Rockcat" fetchpriority="high">
+      <img src="images/w/crazy-penguin-700.webp"
+           srcset="images/w/crazy-penguin-400.webp 400w, images/w/crazy-penguin-700.webp 700w, images/w/crazy-penguin-1000.webp 1000w"
+           sizes="(max-width:980px) 100vw, 50vw"
+           alt="Camiseta TIRIBON del diseño Crazy Penguin, ilustrado por Lucas Baró" fetchpriority="high">
     </figure>
-    <p class="note note-1">Más juego<br>más historias</p>
-    <p class="note note-2">Infancia en<br>modo creativo</p>
   </div>
 </section>
 
@@ -210,13 +146,12 @@
         <li>Diseño exclusivo de autor</li>
       </ul>
       <a class="btn-solid lemon" href="#" data-wa="Hola! Quiero consultar por las toallas de microfibra de TIRIBON.">Consultar toallas</a>
-      <p class="tow-note">Las fotos de producto de esta línea todavía no están publicadas: abajo ves el diseño que lleva cada toalla.</p>
     </div>
     <div class="tow-art" id="tow-art" aria-hidden="true"></div>
   </div>
 
   <div class="tow-shop">
-    <p class="tow-shop-head">Diseños de la temporada</p>
+    <p class="tow-shop-head">Las cuatro toallas</p>
     <div class="tow-grid" id="tow-grid"></div>
   </div>
 </section>
@@ -346,6 +281,8 @@
 
 </main>
 
+<script src="catalogo.js"></script>
+<script src="comun.js"></script>
 <script src="script.js"></script>
 </body>
 </html>

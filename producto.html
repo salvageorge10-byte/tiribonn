@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Producto — TIRIBON</title>
+<meta name="description" id="meta-desc" content="Diseño exclusivo de Lucas Baró sobre algodón orgánico y microfibra.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Permanent+Marker&family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a class="skip" href="#pdp">Ir al producto</a>
+
+<header class="hdr" id="hdr">
+  <div class="hdr-in">
+    <a href="index.html" class="mark" aria-label="TIRIBON — inicio">
+      <img src="public/tiribon-logo-480.webp" alt="TIRIBON" width="480" height="101">
+    </a>
+
+    <nav class="nav" id="nav" aria-label="Navegación principal">
+      <a href="index.html#toallas">Toallas</a>
+      <a href="index.html#camisetas">Camisetas</a>
+      <a href="index.html#arte">El arte</a>
+      <a href="index.html#nosotros">Nosotros</a>
+    </nav>
+
+    <div class="hdr-end">
+      <button class="cart-btn" id="cart-toggle">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8Z"/>
+          <path d="M9 8V6.5a3 3 0 0 1 6 0V8"/>
+        </svg>
+        <span class="cart-label">Mi pedido</span>
+        <span class="cart-n" id="cart-count">0</span>
+      </button>
+      <button class="burger" id="nav-toggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="sheet">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="sheet" id="sheet" aria-hidden="true">
+  <nav aria-label="Navegación móvil">
+    <a href="index.html#camisetas">Camisetas</a>
+    <a href="index.html#toallas">Toallas</a>
+    <a href="index.html#arte">El arte</a>
+    <a href="index.html#nosotros">Nosotros</a>
+    <a href="index.html#info">Cómo comprar</a>
+  </nav>
+  <a class="sheet-wa" href="#" data-wa="Hola! Quiero consultar por TIRIBON.">Escríbenos por WhatsApp</a>
+</div>
+
+<!-- CARRITO -->
+<div class="scrim" id="cart-scrim"></div>
+<aside class="drawer" id="cart-drawer" aria-hidden="true" aria-label="Tu pedido">
+  <div class="drawer-top">
+    <h2>Tu pedido</h2>
+    <button class="x" id="cart-close" aria-label="Cerrar pedido">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <div class="drawer-body" id="cart-items"></div>
+  <div class="drawer-foot">
+    <div class="drawer-sum">
+      <span id="cart-summary-count">0 artículos</span>
+      <span class="dim">Precio a confirmar</span>
+    </div>
+    <p class="drawer-note">No cobramos desde la web. Preparas tu lista aquí y cerramos talla o medida, stock y precio por WhatsApp.</p>
+    <button class="wa-btn" id="cart-wa" disabled>Enviar pedido por WhatsApp</button>
+  </div>
+</aside>
+
+<main class="pdp" id="pdp">
+
+  <nav class="crumb" aria-label="Ruta de navegación">
+    <a href="index.html">Inicio</a>
+    <span aria-hidden="true">›</span>
+    <a href="index.html#camisetas" id="crumb-cat">Camisetas</a>
+    <span aria-hidden="true">›</span>
+    <span id="crumb-name" aria-current="page"></span>
+  </nav>
+
+  <div class="pdp-main">
+
+    <div class="pdp-gallery">
+      <div class="pdp-thumbs" id="pdp-thumbs" role="group" aria-label="Vistas del producto"></div>
+      <figure class="pdp-shot" id="pdp-shot">
+        <span class="pdp-frame" id="pdp-frame"></span>
+        <figcaption class="pdp-cap" id="pdp-cap"></figcaption>
+      </figure>
+    </div>
+
+    <div class="pdp-info">
+      <p class="pdp-kick" id="pdp-kick"></p>
+      <h1 id="pdp-name"></h1>
+      <p class="pdp-desc" id="pdp-desc"></p>
+
+      <p class="pdp-price">Precio por WhatsApp</p>
+
+      <div class="pdp-buy">
+        <div class="stepper">
+          <button type="button" id="pdp-minus" aria-label="Restar unidad">−</button>
+          <span id="pdp-qty">1</span>
+          <button type="button" id="pdp-plus" aria-label="Sumar unidad">+</button>
+        </div>
+        <button type="button" class="wa-btn" id="pdp-add">Añadir al pedido</button>
+      </div>
+
+      <a class="pdp-wa" id="pdp-wa" href="#">Consultar este diseño por WhatsApp</a>
+
+      <p class="pdp-sub">Características clave</p>
+      <ul class="pdp-specs" id="pdp-specs"></ul>
+
+      <details class="pdp-care" id="pdp-care">
+        <summary>Cuidado de la prenda</summary>
+        <ul>
+          <li>Lava del revés para cuidar el estampado</li>
+          <li>Agua fría, ciclo suave</li>
+          <li>No planches sobre el dibujo</li>
+          <li>Evita la secadora: la prenda dura más</li>
+        </ul>
+      </details>
+    </div>
+
+  </div>
+
+  <section class="pdp-more">
+    <h2 id="pdp-more-title">Los otros diseños</h2>
+    <div class="pdp-more-grid" id="pdp-more"></div>
+  </section>
+
+</main>
+
+<footer class="end" id="contacto">
+  <div class="end-top">
+    <h2>¿Te ayudamos a elegir?</h2>
+    <p>Escríbenos y te confirmamos talla, stock y precio en el momento. También te avisamos cuando sale una colección nueva de Lucas Baró.</p>
+    <a class="btn-solid lemon big" href="#" data-wa="Hola! Quiero consultar por las camisetas y toallas de TIRIBON.">Escríbenos por WhatsApp</a>
+    <p class="end-slogan">TIRIBON — Arte en movimiento, confort para los tuyos.</p>
+  </div>
+  <div class="end-word" aria-hidden="true"><span class="w1">tiri</span><span class="w2">bon</span></div>
+  <div class="end-base">
+    <span>© 2026 TIRIBON</span>
+    <span>Ilustraciones exclusivas de Lucas Baró</span>
+  </div>
+</footer>
+
+<script src="catalogo.js"></script>
+<script src="comun.js"></script>
+<script src="producto.js"></script>
+</body>
+</html>

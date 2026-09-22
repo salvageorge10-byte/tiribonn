@@ -84,11 +84,45 @@ function changeQty(id, delta) {
   renderCart();
 }
 
+/* ---------------------------------------------------------
+   Datos del cliente (formulario del carrito)
+--------------------------------------------------------- */
+const cfNombre = $('#cf-nombre');
+const cfTelefono = $('#cf-telefono');
+const cfEntrega = $('#cf-entrega');
+const cfPago = $('#cf-pago');
+const cfNotas = $('#cf-notas');
+const cfErr = $('#cf-err');
+
+[cfNombre, cfTelefono].forEach((el) => el.addEventListener('input', () => { cfErr.hidden = true; }));
+
 function buildMessage() {
   if (!cart.length) return '';
-  let m = '¡Hola! Quiero hacer un pedido de TIRIBON:\n\n';
-  cart.forEach((i) => { m += `• ${i.name} — x${i.qty}\n`; });
-  m += '\n¿Me confirmáis tallas disponibles, stock y precio?';
+
+  const nombre = cfNombre.value.trim();
+  const telefono = cfTelefono.value.trim();
+  const entrega = cfEntrega.value;
+  const pago = cfPago.value;
+  const notas = cfNotas.value.trim();
+
+  const pad = (n) => String(n).padStart(2, '0');
+  const hoy = new Date();
+  const fecha = `${pad(hoy.getDate())}/${pad(hoy.getMonth() + 1)}/${hoy.getFullYear()}`;
+  const sep = '—'.repeat(20);
+
+  let m = `*NUEVO PEDIDO - TIRIBON*\n${sep}\n`;
+  m += `Cliente: ${nombre}\n`;
+  m += `Teléfono: ${telefono}\n`;
+  m += `Fecha: ${fecha}\n`;
+  m += `Entrega: ${entrega}\n`;
+  m += `Pago: ${pago}\n`;
+  m += `${sep}\n*PEDIDO*\n`;
+  cart.forEach((i) => { m += `* ${i.qty} ${i.name} — ${i.color}\n`; });
+  m += sep;
+  if (notas) m += `\nNotas: ${notas}`;
+  m += '\n\nPrecio, talles y stock te los confirmamos por acá.';
+  if (pago === 'Transferencia') m += '\nTe pasamos alias y titular apenas confirmemos el pedido.';
+
   return m;
 }
 
@@ -131,6 +165,11 @@ function renderCart() {
 }
 
 waBtn.addEventListener('click', () => {
+  if (!cfNombre.value.trim() || !cfTelefono.value.trim()) {
+    cfErr.hidden = false;
+    (!cfNombre.value.trim() ? cfNombre : cfTelefono).focus();
+    return;
+  }
   const msg = buildMessage();
   if (msg) window.open(waLink(msg), '_blank', 'noopener');
 });

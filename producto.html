@@ -63,13 +63,48 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
     </button>
   </div>
-  <div class="drawer-body" id="cart-items"></div>
+  <div class="drawer-body">
+    <div id="cart-items"></div>
+    <form class="cf" id="cart-form" novalidate>
+      <p class="cf-title">Tus datos para el pedido</p>
+      <div class="cf-row">
+        <label for="cf-nombre">Nombre y apellido</label>
+        <input type="text" id="cf-nombre" name="nombre" autocomplete="name" placeholder="Tu nombre">
+      </div>
+      <div class="cf-row">
+        <label for="cf-telefono">Teléfono</label>
+        <input type="tel" id="cf-telefono" name="telefono" autocomplete="tel" placeholder="Ej: 11 2345 6789">
+      </div>
+      <div class="cf-grid">
+        <div class="cf-row">
+          <label for="cf-entrega">Entrega</label>
+          <select id="cf-entrega" name="entrega">
+            <option value="Retiro a coordinar">Retiro</option>
+            <option value="Envío a coordinar">Envío</option>
+          </select>
+        </div>
+        <div class="cf-row">
+          <label for="cf-pago">Pago</label>
+          <select id="cf-pago" name="pago">
+            <option value="A coordinar">A coordinar</option>
+            <option value="Efectivo">Efectivo</option>
+            <option value="Transferencia">Transferencia</option>
+          </select>
+        </div>
+      </div>
+      <div class="cf-row">
+        <label for="cf-notas">Talles o notas <span class="dim">(opcional)</span></label>
+        <textarea id="cf-notas" name="notas" rows="2" placeholder="Ej: talle 6 años para la Rockcat"></textarea>
+      </div>
+      <p class="cf-err" id="cf-err" role="alert" hidden>Completá tu nombre y teléfono para enviar el pedido.</p>
+    </form>
+  </div>
   <div class="drawer-foot">
     <div class="drawer-sum">
       <span id="cart-summary-count">0 artículos</span>
       <span class="dim">Precio a confirmar</span>
     </div>
-    <p class="drawer-note">No cobramos desde la web. Preparas tu lista aquí y cerramos talla o medida, stock y precio por WhatsApp.</p>
+    <p class="drawer-note">No cobramos desde la web: completá tus datos y cerramos talla, stock y precio por WhatsApp.</p>
     <button class="wa-btn" id="cart-wa" disabled>Enviar pedido por WhatsApp</button>
   </div>
 </aside>

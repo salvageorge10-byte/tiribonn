@@ -3,11 +3,9 @@
    Lo cargan index.html y producto.html.
    ========================================================= */
 
-/* TODO: cuando haya número de WhatsApp, ponerlo acá en formato
-   internacional y sin el "+" (ej: "5491122334455").
-   Mientras esté vacío, el botón abre WhatsApp con el mensaje ya
-   escrito para que se elija el contacto a mano. */
-const WHATSAPP_NUMBER = '';
+/* Número de WhatsApp donde llegan los pedidos, en formato internacional
+   y sin el "+" (España, +34 618 54 56 69). */
+const WHATSAPP_NUMBER = '34618545669';
 
 const waLink = (msg) =>
   `${WHATSAPP_NUMBER ? `https://wa.me/${WHATSAPP_NUMBER}` : 'https://api.whatsapp.com/send'}?text=${encodeURIComponent(msg)}`;

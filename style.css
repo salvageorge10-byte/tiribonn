@@ -601,15 +601,12 @@ section{ scroll-margin-top:calc(var(--hdr-h) + 10px); }
 .cf-row{ display:flex; flex-direction:column; gap:5px; margin-bottom:10px; }
 .cf-row:last-child{ margin-bottom:0; }
 .cf-row label{ font-size:.8rem; font-weight:700; color:var(--ink-70); }
-.cf-grid{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:10px; }
-.cf-grid .cf-row{ margin-bottom:0; }
-.cf input, .cf select, .cf textarea{
+.cf input{
   font:inherit; font-size:.94rem; color:var(--ink);
   background:var(--paper-3); border:2px solid transparent; border-radius:8px;
   padding:9px 11px; transition:border-color .16s;
 }
-.cf input:focus, .cf select:focus, .cf textarea:focus{ outline:none; border-color:var(--blue); }
-.cf textarea{ resize:vertical; min-height:44px; }
+.cf input:focus{ outline:none; border-color:var(--blue); }
 .cf-err{ margin-top:10px; font-size:.82rem; font-weight:700; color:var(--pink); }
 
 .drawer-sum{ display:flex; justify-content:space-between; font-size:.91rem; font-weight:700; }

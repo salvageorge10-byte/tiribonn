@@ -89,9 +89,6 @@ function changeQty(id, delta) {
 --------------------------------------------------------- */
 const cfNombre = $('#cf-nombre');
 const cfTelefono = $('#cf-telefono');
-const cfEntrega = $('#cf-entrega');
-const cfPago = $('#cf-pago');
-const cfNotas = $('#cf-notas');
 const cfErr = $('#cf-err');
 
 [cfNombre, cfTelefono].forEach((el) => el.addEventListener('input', () => { cfErr.hidden = true; }));
@@ -101,9 +98,6 @@ function buildMessage() {
 
   const nombre = cfNombre.value.trim();
   const telefono = cfTelefono.value.trim();
-  const entrega = cfEntrega.value;
-  const pago = cfPago.value;
-  const notas = cfNotas.value.trim();
 
   const pad = (n) => String(n).padStart(2, '0');
   const hoy = new Date();
@@ -114,14 +108,10 @@ function buildMessage() {
   m += `Cliente: ${nombre}\n`;
   m += `Teléfono: ${telefono}\n`;
   m += `Fecha: ${fecha}\n`;
-  m += `Entrega: ${entrega}\n`;
-  m += `Pago: ${pago}\n`;
   m += `${sep}\n*PEDIDO*\n`;
   cart.forEach((i) => { m += `* ${i.qty} ${i.name} — ${i.color}\n`; });
   m += sep;
-  if (notas) m += `\nNotas: ${notas}`;
-  m += '\n\nPrecio, talles y stock te los confirmamos por acá.';
-  if (pago === 'Transferencia') m += '\nTe pasamos alias y titular apenas confirmemos el pedido.';
+  m += '\nPrecio, talles y stock te los confirmamos por acá.';
 
   return m;
 }

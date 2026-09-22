@@ -28,7 +28,7 @@ Y abrir http://localhost:5501
 | `images/` | Fotos originales de las camisetas (JPG). Son los **masters**: no se sirven, se usan para regenerar variantes |
 | `images/w/` | Variantes servidas de las camisetas: `<id>-400/700/1000.webp` |
 | `images/toallas/` | Toallas en WebP: `<id>-400/-700.webp` y `<id>.webp` (1000) |
-| `public/tiribon-logo.png` | Logo de marca del header |
+| `brand/tiribon-logo.png` | Logo de marca del header |
 | `assets/` | Dibujos de marca en SVG |
 
 **El orden de los `<script>` importa**: `catalogo.js` → `comun.js` → la página.

@@ -21,6 +21,7 @@ const PRODUCTS = [
     id: 'rockcat',
     pos: '50% 6%',
     type: 'camiseta',
+    soon: true,
     name: 'Rockcat',
     full: 'Camiseta Rockcat',
     color: 'Rosa',
@@ -32,6 +33,7 @@ const PRODUCTS = [
     id: 'devil-inside',
     pos: '50% 14%',
     type: 'camiseta',
+    soon: true,
     name: 'Devil Inside',
     full: 'Camiseta Devil Inside',
     color: 'Negra',
@@ -43,6 +45,7 @@ const PRODUCTS = [
     id: 'crazy-penguin',
     pos: '50% 12%',
     type: 'camiseta',
+    soon: true,
     name: 'Crazy Penguin',
     full: 'Camiseta Crazy Penguin',
     color: 'Amarilla',
@@ -54,6 +57,7 @@ const PRODUCTS = [
     id: 'save-the-planet',
     pos: '50% 8%',
     type: 'camiseta',
+    soon: true,
     name: 'Save the Planet',
     full: 'Camiseta Save the Planet',
     color: 'Blanca',
@@ -76,6 +80,7 @@ const TOWELS = [
   {
     id: 'toalla-rockcat',
     type: 'toalla',
+    price: 30,
     name: 'Rockcat',
     full: 'Toalla de Microfibra Rockcat',
     color: 'Edición Lucas Baró',
@@ -86,6 +91,7 @@ const TOWELS = [
   {
     id: 'toalla-crazy-penguin',
     type: 'toalla',
+    price: 30,
     name: 'Crazy Penguin',
     full: 'Toalla de Microfibra Crazy Penguin',
     color: 'Edición Lucas Baró',
@@ -96,6 +102,7 @@ const TOWELS = [
   {
     id: 'toalla-iconos',
     type: 'toalla',
+    price: 30,
     name: 'Iconos',
     full: 'Toalla de Microfibra Iconos',
     color: 'Edición Lucas Baró',
@@ -106,6 +113,7 @@ const TOWELS = [
   {
     id: 'toalla-save-the-planet',
     type: 'toalla',
+    price: 30,
     name: 'Save the Planet',
     full: 'Toalla de Microfibra Save the Planet',
     color: 'Edición Lucas Baró',
@@ -138,5 +146,10 @@ const srcsetDe = (p) =>
     : `images/w/${p.id}-400.webp 400w, images/w/${p.id}-700.webp 700w, images/w/${p.id}-1000.webp 1000w`;
 
 const ALL = [...PRODUCTS, ...TOWELS];
+
+/* Toallas: US$30,00 (confirmado por la clienta el 24/09/2026).
+   Camisetas: marcadas «soon», se ven pero todavía no se venden.
+   El cobro sigue siendo por WhatsApp: no hay enlaces de pago. */
+const precio = (n) => `US$${n.toFixed(2)}`;
 const find = (id) => ALL.find((x) => x.id === id);
 

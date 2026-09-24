@@ -36,7 +36,7 @@ sheet.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => set
 const CART_KEY = 'tiribon-cart';
 let cart = (() => {
   try { return JSON.parse(localStorage.getItem(CART_KEY)) || []; } catch { return []; }
-})();
+})().filter((i) => { const p = find(i.id); return p && !p.soon; }); // descarta camisetas guardadas antes de «próximamente»
 
 const drawer = $('#cart-drawer');
 const cartScrim = $('#cart-scrim');
@@ -45,9 +45,11 @@ const itemsEl = $('#cart-items');
 const countEl = $('#cart-count');
 const sumEl = $('#cart-summary-count');
 const waBtn = $('#cart-wa');
+const totalEl = $('#cart-total');
 
 const saveCart = () => localStorage.setItem(CART_KEY, JSON.stringify(cart));
 const totalCount = () => cart.reduce((n, i) => n + i.qty, 0);
+const totalPrice = () => cart.reduce((n, i) => n + (find(i.id)?.price || 0) * i.qty, 0);
 
 function openCart() {
   drawer.classList.add('is-open');
@@ -65,7 +67,7 @@ cartScrim.addEventListener('click', closeCart);
 
 function addToCart(id, qty = 1) {
   const p = find(id);
-  if (!p) return;
+  if (!p || p.soon) return;
   const hit = cart.find((i) => i.id === id);
   if (hit) hit.qty += qty;
   else cart.push({ id, name: p.full, color: p.color, img: p.img, thumb: imgChico(p), type: p.type, qty });
@@ -103,17 +105,16 @@ function buildMessage() {
   const hoy = new Date();
   const fecha = `${pad(hoy.getDate())}/${pad(hoy.getMonth() + 1)}/${hoy.getFullYear()}`;
   // corto y sin separadores: lo manda el cliente y no tiene que borrar nada.
-  // Las toallas no llevan color (su campo dice «Edición Lucas Baró»).
-  const linea = (i) =>
-    `${i.qty} × ${i.name}${i.type === 'camiseta' ? ` (${i.color.toLowerCase()})` : ''}`;
+  const linea = (i) => `${i.qty} × ${i.name} — ${precio(find(i.id).price * i.qty)}`;
 
   return [
     `*Pedido TIRIBON* · ${fecha}`,
     ...cart.map(linea),
+    `*Total: ${precio(totalPrice())}*`,
     '',
     `Nombre: ${nombre}`,
     `Teléfono: ${telefono}`,
-    '¿Me confirmáis precio, talla y stock?',
+    '¿Me confirmáis stock y cómo hago el pago?',
   ].join('\n');
 }
 
@@ -127,7 +128,7 @@ function renderCart() {
         <img src="${i.thumb || i.img}" alt="" loading="lazy">
         <div>
           <h4>${i.name}</h4>
-          <p class="c-sub">${i.type === 'toalla' ? 'Microfibra · Lucas Baró' : i.color + ' · algodón orgánico'}</p>
+          <p class="c-sub">Microfibra · ${precio(find(i.id).price)}</p>
           <div class="stepper">
             <button type="button" data-minus aria-label="Restar una unidad de ${i.name}">−</button>
             <span>${i.qty}</span>
@@ -153,6 +154,7 @@ function renderCart() {
   const n = totalCount();
   countEl.textContent = n;
   sumEl.textContent = n === 1 ? '1 artículo' : `${n} artículos`;
+  totalEl.textContent = n ? `Total ${precio(totalPrice())}` : '';
 }
 
 waBtn.addEventListener('click', () => {

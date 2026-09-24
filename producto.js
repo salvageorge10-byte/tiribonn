@@ -81,7 +81,7 @@ if (!prod) {
         'Compacta y ligera: ocupa un espacio mínimo en tu bolsa',
         'Estampación digital de alta definición, colores vibrantes lavado tras lavado',
         'Diseño exclusivo ilustrado por <b>Lucas Baró</b>',
-        'Medidas y precio se confirman por WhatsApp',
+        'El pago y el envío se coordinan por WhatsApp',
       ]
     : [
         '100% algodón orgánico certificado',
@@ -93,6 +93,11 @@ if (!prod) {
   ).map((li) => `<li>${li}</li>`).join('');
 
   $('#pdp-care').hidden = esToalla;
+
+  /* ---- precio: las toallas tienen precio fijo; las camisetas aún no se venden ---- */
+  $('#pdp-price').textContent = prod.soon ? 'Próximamente' : precio(prod.price);
+  $('#pdp-price').classList.toggle('is-price', !prod.soon);
+  if (prod.soon) $('.pdp-buy').hidden = true;
 
   /* ---- cantidad y pedido ---- */
   let qty = 1;
@@ -118,9 +123,12 @@ if (!prod) {
   });
 
   const wa = $('#pdp-wa');
-  wa.setAttribute('href', waLink(`¡Hola! Quiero consultar por ${prod.full} de TIRIBON.`));
+  wa.setAttribute('href', waLink(prod.soon
+    ? `¡Hola! Me interesa la ${prod.full} de TIRIBON. ¿Me avisáis cuando esté disponible?`
+    : `¡Hola! Quiero consultar por la ${prod.full} de TIRIBON.`));
   wa.setAttribute('target', '_blank');
   wa.setAttribute('rel', 'noopener');
+  if (prod.soon) wa.textContent = 'Avisadme por WhatsApp cuando llegue';
 
   /* ---- otros diseños de la misma línea ---- */
   const hermanos = ALL.filter((x) => x.type === prod.type && x.id !== prod.id);

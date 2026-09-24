@@ -792,3 +792,23 @@ section{ scroll-margin-top:calc(var(--hdr-h) + 10px); }
   color:var(--lemon); max-width:none;
 }
 @media (max-width:620px){ .end-base{ flex-direction:column; text-align:center; } }
+
+/* =========================================================
+   Precio de toallas y camisetas «próximamente» (24/09/2026)
+   ========================================================= */
+/* un solo logo en la portada: el header va sin marca, así que
+   nav e iconos se anclan a su columna */
+.nav{ grid-column:2; }
+.hdr-end{ grid-column:3; }
+
+.twl-price{ font-weight:800; font-size:1.05rem; color:var(--lemon); margin-top:-2px; }
+
+.prod-soon{
+  margin-top:8px;
+  font-family:var(--disp); font-size:1rem; color:var(--navy);
+  background:var(--sun); padding:6px 14px; border-radius:999px;
+  transform:rotate(-2deg);
+}
+
+.pdp-price.is-price{ font-size:1.6rem; letter-spacing:0; color:var(--navy); }
+.pdp-buy[hidden]{ display:none; }

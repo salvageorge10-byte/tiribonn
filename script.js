@@ -31,7 +31,7 @@ const TONO = { rockcat: '#FBD3E6', 'devil-inside': '#E4E1EC', 'crazy-penguin': '
 
 $('#shop-grid').innerHTML = PRODUCTS.map(
   (p) => `
-  <article class="prod" style="--tono:${TONO[p.id] || '#F3E3CC'}">
+  <article class="prod" data-id="${p.id}" style="--tono:${TONO[p.id] || '#F3E3CC'}">
     <a class="prod-img" href="producto.html?id=${p.id}" aria-label="Ver ${p.full}" style="--w:${p.cw};--x:${p.cx};--t:${p.cy};--pos:${p.pos}">
       <img src="${imgGrande(p)}" srcset="${srcsetDe(p)}"
            sizes="(max-width:620px) 46vw, (max-width:1100px) 30vw, 22vw"
@@ -39,8 +39,8 @@ $('#shop-grid').innerHTML = PRODUCTS.map(
       <span class="prod-zoom" aria-hidden="true"><img src="${imgGrande(p)}" alt="" loading="lazy"></span>
     </a>
     <a class="prod-name" href="producto.html?id=${p.id}">${p.name}</a>
-    <p class="prod-meta"><span class="prod-color">${p.color}</span> Precio por WhatsApp</p>
-    <button class="prod-add" data-add="${p.id}">Añadir al pedido</button>
+    <p class="prod-meta"><span class="prod-color">${p.color}</span></p>
+    <p class="prod-soon">Próximamente</p>
   </article>`
 ).join('');
 
@@ -56,6 +56,7 @@ $('#tow-grid').innerHTML = TOWELS.map(
            alt="${t.full} extendida, vista de frente" width="1000" height="1000" loading="lazy">
     </a>
     <a class="twl-name" href="producto.html?id=${t.id}">${t.name}</a>
+    <p class="twl-price">${precio(t.price)}</p>
     <button class="twl-add" data-add="${t.id}">Añadir al pedido</button>
   </article>`
 ).join('');
@@ -85,7 +86,7 @@ function filterProducts(q) {
   const term = norm(q.trim());
   let shown = 0;
   $$('.prod').forEach((card) => {
-    const p = PRODUCTS.find((x) => x.id === card.querySelector('[data-add]').dataset.add);
+    const p = PRODUCTS.find((x) => x.id === card.dataset.id);
     const hay = norm(`${p.name} ${p.color} ${p.desc}`);
     const match = !term || hay.includes(term);
     card.hidden = !match;

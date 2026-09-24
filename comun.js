@@ -102,18 +102,19 @@ function buildMessage() {
   const pad = (n) => String(n).padStart(2, '0');
   const hoy = new Date();
   const fecha = `${pad(hoy.getDate())}/${pad(hoy.getMonth() + 1)}/${hoy.getFullYear()}`;
-  const sep = '—'.repeat(20);
+  // corto y sin separadores: lo manda el cliente y no tiene que borrar nada.
+  // Las toallas no llevan color (su campo dice «Edición Lucas Baró»).
+  const linea = (i) =>
+    `${i.qty} × ${i.name}${i.type === 'camiseta' ? ` (${i.color.toLowerCase()})` : ''}`;
 
-  let m = `*NUEVO PEDIDO - TIRIBON*\n${sep}\n`;
-  m += `Cliente: ${nombre}\n`;
-  m += `Teléfono: ${telefono}\n`;
-  m += `Fecha: ${fecha}\n`;
-  m += `${sep}\n*PEDIDO*\n`;
-  cart.forEach((i) => { m += `* ${i.qty} ${i.name} — ${i.color}\n`; });
-  m += sep;
-  m += '\nPrecio, talles y stock te los confirmamos por acá.';
-
-  return m;
+  return [
+    `*Pedido TIRIBON* · ${fecha}`,
+    ...cart.map(linea),
+    '',
+    `Nombre: ${nombre}`,
+    `Teléfono: ${telefono}`,
+    '¿Me confirmáis precio, talla y stock?',
+  ].join('\n');
 }
 
 function renderCart() {

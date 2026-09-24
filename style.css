@@ -801,7 +801,7 @@ section{ scroll-margin-top:calc(var(--hdr-h) + 10px); }
 .nav{ grid-column:2; }
 .hdr-end{ grid-column:3; }
 
-.twl-price{ font-weight:800; font-size:1.05rem; color:var(--lemon); margin-top:-2px; }
+.twl-price{ font-weight:700; font-size:1.02rem; color:#fff; margin-top:-2px; }
 
 .prod-soon{
   margin-top:8px;

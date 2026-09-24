@@ -27,7 +27,7 @@ if ('IntersectionObserver' in window && spied.length) {
 /* ---------------------------------------------------------
    Camisetas — la foto va sobre un fondo del color de la prenda
 --------------------------------------------------------- */
-const TONO = { rockcat: '#FBD3E6', 'devil-inside': '#E4E1EC', 'crazy-penguin': '#FCEFB4', 'save-the-planet': '#D9ECF7' };
+const TONO = { rockcat: '#FBD3E6', 'devil-inside': '#E4E1EC', 'crazy-penguin': '#FCEFB4', 'save-the-planet': '#FFFFFF' };
 
 $('#shop-grid').innerHTML = PRODUCTS.map(
   (p) => `

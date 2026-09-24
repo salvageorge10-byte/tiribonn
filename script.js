@@ -25,78 +25,40 @@ if ('IntersectionObserver' in window && spied.length) {
 }
 
 /* ---------------------------------------------------------
-   Grilla de colección
+   Camisetas — la foto va sobre un fondo del color de la prenda
 --------------------------------------------------------- */
+const TONO = { rockcat: '#FBD3E6', 'devil-inside': '#E4E1EC', 'crazy-penguin': '#FCEFB4', 'save-the-planet': '#D9ECF7' };
+
 $('#shop-grid').innerHTML = PRODUCTS.map(
   (p) => `
-  <article class="prod pan-${p.ct}" style="--c:${p.c}">
+  <article class="prod" style="--tono:${TONO[p.id] || '#F3E3CC'}">
     <a class="prod-img" href="producto.html?id=${p.id}" aria-label="Ver ${p.full}" style="--w:${p.cw};--x:${p.cx};--t:${p.cy};--pos:${p.pos}">
       <img src="${imgGrande(p)}" srcset="${srcsetDe(p)}"
-           sizes="(max-width:620px) 46vw, (max-width:980px) 45vw, 44vw"
-           alt="Niño con la ${p.full.toLowerCase()} ${p.color.toLowerCase()}, diseño ${p.name}"
-           loading="lazy">
+           sizes="(max-width:620px) 46vw, (max-width:1100px) 30vw, 22vw"
+           alt="${p.full} ${p.color.toLowerCase()}, diseño ${p.name}" loading="lazy">
       <span class="prod-zoom" aria-hidden="true"><img src="${imgGrande(p)}" alt="" loading="lazy"></span>
     </a>
-    <div class="prod-info">
-      <a class="prod-name" href="producto.html?id=${p.id}">${p.name}</a>
-      <p class="prod-tags"><span>${p.color}</span><span>Algodón orgánico</span></p>
-      <div class="prod-buy">
-        <span class="prod-price">Precio por WhatsApp</span>
-        <button class="prod-add" data-add="${p.id}">Añadir</button>
-      </div>
-    </div>
+    <a class="prod-name" href="producto.html?id=${p.id}">${p.name}</a>
+    <p class="prod-meta"><span class="prod-color">${p.color}</span> Precio por WhatsApp</p>
+    <button class="prod-add" data-add="${p.id}">Añadir al pedido</button>
   </article>`
 ).join('');
 
 /* ---------------------------------------------------------
-   Rejilla de toallas
+   Toallas
 --------------------------------------------------------- */
 $('#tow-grid').innerHTML = TOWELS.map(
   (t) => `
   <article class="twl">
     <a class="twl-art" href="producto.html?id=${t.id}" aria-label="Ver ${t.full}">
       <img src="${imgChico(t)}" srcset="${srcsetDe(t)}"
-           sizes="(max-width:900px) 46vw, 23vw"
+           sizes="(max-width:760px) 44vw, 16vw"
            alt="${t.full} extendida, vista de frente" width="1000" height="1000" loading="lazy">
     </a>
-    <div class="twl-info">
-      <a class="twl-name" href="producto.html?id=${t.id}">${t.name}</a>
-      <p class="twl-sub">Edición Lucas Baró</p>
-      <button class="twl-add" data-add="${t.id}">Añadir al pedido</button>
-    </div>
+    <a class="twl-name" href="producto.html?id=${t.id}">${t.name}</a>
+    <button class="twl-add" data-add="${t.id}">Añadir al pedido</button>
   </article>`
 ).join('');
-
-/* ---------------------------------------------------------
-   Plancha de diseños
---------------------------------------------------------- */
-$('#prints-strip').innerHTML = PRODUCTS.map(
-  (p) => `
-  <figure class="plate" style="--w:${p.cw};--x:${p.cx};--t:${p.cy}">
-    <span class="plate-img"><img src="${imgGrande(p)}" srcset="${srcsetDe(p)}"
-        sizes="(max-width:620px) 98vw, 50vw"
-        alt="Detalle ampliado del diseño ${p.name}" loading="lazy"></span>
-    <figcaption>${p.name}</figcaption>
-  </figure>`
-).join('');
-
-/* ---------------------------------------------------------
-   Dibujos de la marca sobre la banda de toallas
---------------------------------------------------------- */
-$('#tow-art').innerHTML =
-  '<img src="assets/icons/gato.svg" alt="" width="300" height="300">';
-
-/* ---------------------------------------------------------
-   FAQ
---------------------------------------------------------- */
-$$('.faq-i').forEach((item) => {
-  const q = item.querySelector('.faq-q');
-  q.addEventListener('click', () => {
-    const open = item.classList.toggle('is-open');
-    q.setAttribute('aria-expanded', String(open));
-  });
-});
-
 
 /* ---------------------------------------------------------
    Buscador — filtra la rejilla de verdad

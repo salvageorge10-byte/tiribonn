@@ -4,6 +4,18 @@
    que llevan las estampas. Color de la prenda en cada panel.
    ========================================================= */
 
+/* Tipografías servidas desde el propio sitio (antes Google Fonts: dos
+   servidores más antes de poder pintar texto). Solo el subset latino,
+   que ya trae á, ñ, ¿. Schibsted es variable: un archivo cubre 400–800. */
+@font-face{
+  font-family:"Permanent Marker"; font-style:normal; font-weight:400; font-display:swap;
+  src:url("fonts/permanent-marker-latin.woff2") format("woff2");
+}
+@font-face{
+  font-family:"Schibsted Grotesk"; font-style:normal; font-weight:400 800; font-display:swap;
+  src:url("fonts/schibsted-grotesk-latin.woff2") format("woff2");
+}
+
 :root{
   --paper:      #FFF7EA;
   --paper-2:    #FFEEDA;
@@ -35,8 +47,7 @@
   --sun:        #F6CE55;
   --cream:      #FDFBF6;
 
-  --logo: "Baloo 2", system-ui, sans-serif;
-  --disp: "Permanent Marker", "Baloo 2", cursive;
+  --disp: "Permanent Marker", cursive;
   --text: "Schibsted Grotesk", system-ui, sans-serif;
 
   --gut: clamp(18px, 4.6vw, 72px);
@@ -764,15 +775,6 @@ section{ scroll-margin-top:calc(var(--hdr-h) + 10px); }
 .end-top h2{ font-size:clamp(2rem,4.4vw,3.6rem); color:var(--lemon); }
 .end-top p{ margin:16px auto 28px; max-width:44ch; color:var(--on-dark-70); }
 
-.end-word{
-  font-family:var(--logo); font-weight:800; letter-spacing:-.03em;
-  font-size:clamp(4.6rem,19vw,17rem); line-height:.9;
-  padding:0 var(--gut); margin:0; text-align:center;
-  height:.5em; overflow:hidden;
-  user-select:none; pointer-events:none;
-}
-.end-word .w1{ color:rgba(255,247,234,.2); }
-.end-word .w2{ color:rgba(18,146,139,.55); }
 
 .end-base{
   max-width:var(--maxw); margin:0 auto;

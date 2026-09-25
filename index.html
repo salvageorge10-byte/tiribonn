@@ -5,9 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TIRIBON — Arte, confort y color para tu día a día</title>
 <meta name="description" content="Toallas de microfibra de alto rendimiento y camisetas infantiles de algodón 100% orgánico, ilustradas en exclusiva por el artista Lucas Baró.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Permanent+Marker&family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preload" href="fonts/schibsted-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/permanent-marker-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -117,7 +116,8 @@
   <div class="fh-center">
     <h1 class="fh-logo">
       <svg class="fh-rays" viewBox="0 0 60 70" aria-hidden="true"><g stroke="#F6CE55" stroke-width="8" stroke-linecap="round"><path d="M40 8 52 20"/><path d="M8 34h40"/><path d="M40 62l12-12"/></g></svg>
-      <img src="brand/tiribon-logo-1100a.webp" alt="TIRIBON" width="1100" height="231" fetchpriority="high">
+      <img src="brand/tiribon-logo-800a.webp" srcset="brand/tiribon-logo-560a.webp 560w, brand/tiribon-logo-800a.webp 800w, brand/tiribon-logo-1100a.webp 1100w"
+           sizes="(max-width:860px) calc(100vw - 36px), 780px" alt="TIRIBON" width="1100" height="231" fetchpriority="high">
     </h1>
     <p class="fh-tag">Arte para llevar. Color para disfrutar.</p>
     <p class="fh-sub">Toallas de microfibra ilustradas y camisetas de algodón orgánico para niños, creadas junto al artista <b>Lucas Baró</b>.</p>
@@ -130,13 +130,13 @@
   </div>
 
   <a class="fh-kid k1" href="producto.html?id=rockcat" aria-label="Ver la camiseta Rockcat">
-    <img src="images/hero/rockcat-500.webp" srcset="images/hero/rockcat-500.webp 500w, images/hero/rockcat-900.webp 900w"
-         sizes="(max-width:760px) 46vw, 26vw" width="500" height="743"
+    <img src="images/hero/rockcat-600.webp" srcset="images/hero/rockcat-400.webp 400w, images/hero/rockcat-600.webp 600w, images/hero/rockcat-900.webp 900w"
+         sizes="(max-width:860px) min(46vw, 300px), (max-width:1180px) clamp(200px, 22vw, 300px), clamp(230px, 24vw, 400px)" width="900" height="1338"
          alt="Niño sonriendo con la camiseta rosa Rockcat">
   </a>
   <a class="fh-kid k2" href="producto.html?id=crazy-penguin" aria-label="Ver la camiseta Crazy Penguin">
-    <img src="images/hero/crazy-penguin-500.webp" srcset="images/hero/crazy-penguin-500.webp 500w, images/hero/crazy-penguin-900.webp 900w"
-         sizes="(max-width:760px) 46vw, 26vw" width="500" height="711"
+    <img src="images/hero/crazy-penguin-600.webp" srcset="images/hero/crazy-penguin-400.webp 400w, images/hero/crazy-penguin-600.webp 600w, images/hero/crazy-penguin-900.webp 900w"
+         sizes="(max-width:860px) min(46vw, 300px), (max-width:1180px) clamp(200px, 22vw, 300px), clamp(230px, 24vw, 400px)" width="900" height="1281"
          alt="Niña sonriendo con la camiseta amarilla Crazy Penguin">
   </a>
 </section>

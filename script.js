@@ -36,13 +36,28 @@ $('#shop-grid').innerHTML = PRODUCTS.map(
       <img src="${imgGrande(p)}" srcset="${srcsetDe(p)}"
            sizes="(max-width:620px) 46vw, (max-width:1100px) 30vw, 22vw"
            alt="${p.full} ${p.color.toLowerCase()}, diseño ${p.name}" loading="lazy">
-      <span class="prod-zoom" aria-hidden="true"><img src="${imgGrande(p)}" alt="" loading="lazy"></span>
+      <span class="prod-zoom" aria-hidden="true" data-src="${imgGrande(p)}"></span>
     </a>
     <a class="prod-name" href="producto.html?id=${p.id}">${p.name}</a>
     <p class="prod-meta"><span class="prod-color">${p.color}</span></p>
     <p class="prod-soon">Próximamente</p>
   </article>`
 ).join('');
+
+/* La foto grande del zoom se pide recién al primer hover o foco:
+   antes se bajaban cuatro fotos de 1000px que casi nadie ve. */
+function cargarZoom(e) {
+  const z = e.currentTarget.querySelector('.prod-zoom[data-src]');
+  if (!z) return;
+  z.innerHTML = `<img src="${z.dataset.src}" alt="">`;
+  z.removeAttribute('data-src');
+}
+if (matchMedia('(hover:hover)').matches) {
+  $$('.prod-img').forEach((a) => {
+    a.addEventListener('pointerenter', cargarZoom);
+    a.addEventListener('focus', cargarZoom);
+  });
+}
 
 /* ---------------------------------------------------------
    Toallas

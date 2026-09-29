@@ -80,7 +80,7 @@ const TOWELS = [
   {
     id: 'toalla-rockcat',
     type: 'toalla',
-    price: 30,
+    price: 45,
     name: 'Rockcat',
     full: 'Toalla de Microfibra Rockcat',
     color: 'Edición Lucas Baró',
@@ -91,7 +91,7 @@ const TOWELS = [
   {
     id: 'toalla-crazy-penguin',
     type: 'toalla',
-    price: 30,
+    price: 45,
     name: 'Crazy Penguin',
     full: 'Toalla de Microfibra Crazy Penguin',
     color: 'Edición Lucas Baró',
@@ -102,7 +102,7 @@ const TOWELS = [
   {
     id: 'toalla-iconos',
     type: 'toalla',
-    price: 30,
+    price: 45,
     name: 'Iconos',
     full: 'Toalla de Microfibra Iconos',
     color: 'Edición Lucas Baró',
@@ -113,7 +113,7 @@ const TOWELS = [
   {
     id: 'toalla-save-the-planet',
     type: 'toalla',
-    price: 30,
+    price: 45,
     name: 'Save the Planet',
     full: 'Toalla de Microfibra Save the Planet',
     color: 'Edición Lucas Baró',
@@ -147,7 +147,7 @@ const srcsetDe = (p) =>
 
 const ALL = [...PRODUCTS, ...TOWELS];
 
-/* Toallas: US$30,00 (confirmado por la clienta el 24/09/2026).
+/* Toallas: US$45,00 (cambiado a pedido el 29/09/2026; antes US$30,00).
    Camisetas: marcadas «soon», se ven pero todavía no se venden.
    El cobro sigue siendo por WhatsApp: no hay enlaces de pago. */
 const precio = (n) => `US$${n.toFixed(2)}`;

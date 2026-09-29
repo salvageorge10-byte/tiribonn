@@ -486,6 +486,9 @@ section{ scroll-margin-top:calc(var(--hdr-h) + 10px); }
   background:var(--cream);
   min-height:clamp(640px,94vh,880px);
   padding:calc(var(--hdr-h) + clamp(20px,3vw,44px)) var(--gut) 0;
+  /* ancho de los chicos, topeado por el alto del hero para que en pantallas
+     bajas no suban hasta el header (1.54 = alto/ancho de la foto de Rockcat) */
+  --kid-w:min(clamp(230px,24vw,400px), calc((clamp(640px,94vh,880px) - 260px) / 1.54));
   display:flex; flex-direction:column; align-items:center;
 }
 
@@ -505,8 +508,10 @@ section{ scroll-margin-top:calc(var(--hdr-h) + 10px); }
   content:""; display:block; width:64px; height:4px; border-radius:3px;
   background:var(--navy); margin-top:10px;
 }
-.fh-note.n1{ left:max(var(--gut),3vw); top:calc(var(--hdr-h) + clamp(70px,8vw,120px)); }
-.fh-note.n2{ right:max(var(--gut),3vw); top:clamp(190px,19vw,280px); }
+/* las notas van ancladas sobre la cabeza de cada chico, no al header:
+   así nunca se pisan, sea cual sea la proporción de la pantalla */
+.fh-note.n1{ left:max(var(--gut),3vw); bottom:calc(var(--kid-w) * 1.536 + 28px); }
+.fh-note.n2{ right:max(var(--gut),3vw); bottom:calc(var(--kid-w) * 1.424 + 28px); }
 
 .fh-center{
   position:relative; z-index:2;
@@ -537,7 +542,7 @@ section{ scroll-margin-top:calc(var(--hdr-h) + 10px); }
 /* los chicos entran por abajo y la ola de la banda les tapa los pies */
 .fh-kid{
   position:absolute; bottom:0; z-index:2;
-  width:clamp(230px,24vw,400px);
+  width:var(--kid-w);
   transition:transform .3s cubic-bezier(.34,1.4,.64,1);
 }
 .fh-kid img{ width:100%; height:auto; }

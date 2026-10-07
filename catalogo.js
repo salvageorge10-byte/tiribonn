@@ -121,6 +121,28 @@ const TOWELS = [
     img: 'images/toallas/save-the-planet.webp',
     desc: 'La ballena y las focas en trazo negro sobre blanco, con el lettering girado sobre el lado largo de la toalla. Microfibra ultraligera y de secado rápido, para viaje, playa, piscina y deporte.',
   },
+  {
+    id: 'toalla-fondo-del-mar',
+    type: 'toalla',
+    price: 49,
+    name: 'Fondo del Mar',
+    full: 'Toalla de Microfibra Fondo del Mar',
+    color: 'Edición Lucas Baró',
+    cw: '170%', cx: '-35%', cy: '-35%',
+    img: 'images/toallas/fondo-del-mar.webp',
+    desc: 'El pulpo, los peces, la tortuga sobre el cofre y un submarino con ojos, en trazo negro sobre un celeste que se va oscureciendo hacia el fondo. Microfibra ultraligera y de secado rápido, para viaje, playa, piscina y deporte.',
+  },
+  {
+    id: 'toalla-pulpo',
+    type: 'toalla',
+    price: 49,
+    name: 'Pulpo',
+    full: 'Toalla de Microfibra Pulpo',
+    color: 'Edición Lucas Baró',
+    cw: '170%', cx: '-35%', cy: '-35%',
+    img: 'images/toallas/pulpo.webp',
+    desc: 'Un pulpo con sombrero que se ríe a carcajadas entre una bolsa, una botella y una pelota, en verdes sobre verde. Microfibra ultraligera y de secado rápido, para viaje, playa, piscina y deporte.',
+  },
 ];
 
 /* ---------------------------------------------------------
@@ -147,7 +169,8 @@ const srcsetDe = (p) =>
 
 const ALL = [...PRODUCTS, ...TOWELS];
 
-/* Toallas: US$45,00 (cambiado a pedido el 29/09/2026; antes US$30,00).
+/* Toallas: US$45,00 (cambiado a pedido el 29/09/2026; antes US$30,00);
+   Fondo del Mar y Pulpo, US$49,00 (agregadas el 07/10/2026).
    Camisetas: marcadas «soon», se ven pero todavía no se venden.
    El cobro sigue siendo por WhatsApp: no hay enlaces de pago. */
 const precio = (n) => `US$${n.toFixed(2)}`;

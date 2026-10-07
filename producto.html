@@ -8,6 +8,7 @@
 <link rel="preload" href="fonts/schibsted-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/permanent-marker-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="efecto-scrolling.css">
 </head>
 <body>
 
@@ -98,7 +99,7 @@
 
   <div class="pdp-main">
 
-    <div class="pdp-gallery">
+    <div class="pdp-gallery" data-anim="fadeInLeft" data-anim-mobile="fadeInUp">
       <div class="pdp-thumbs" id="pdp-thumbs" role="group" aria-label="Vistas del producto"></div>
       <figure class="pdp-shot" id="pdp-shot">
         <span class="pdp-frame" id="pdp-frame"></span>
@@ -106,7 +107,7 @@
       </figure>
     </div>
 
-    <div class="pdp-info">
+    <div class="pdp-info" data-anim="fadeInRight" data-anim-mobile="fadeInUp">
       <p class="pdp-kick" id="pdp-kick"></p>
       <h1 id="pdp-name"></h1>
       <p class="pdp-desc" id="pdp-desc"></p>
@@ -141,7 +142,7 @@
   </div>
 
   <section class="pdp-more">
-    <h2 id="pdp-more-title">Los otros diseños</h2>
+    <h2 id="pdp-more-title" data-anim="fadeInUp">Los otros diseños</h2>
     <div class="pdp-more-grid" id="pdp-more"></div>
   </section>
 
@@ -162,6 +163,11 @@
 
 <script src="catalogo.js"></script>
 <script src="comun.js"></script>
+<a href="#top" class="es-arriba" aria-label="Volver arriba">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</a>
+
 <script src="producto.js"></script>
+<script src="efecto-scrolling.js"></script>
 </body>
 </html>

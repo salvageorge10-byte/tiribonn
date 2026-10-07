@@ -133,7 +133,7 @@ if (!prod) {
   /* ---- otros diseños de la misma línea ---- */
   const hermanos = ALL.filter((x) => x.type === prod.type && x.id !== prod.id);
   $('#pdp-more').innerHTML = hermanos.map((x) => `
-    <a class="mini" href="producto.html?id=${x.id}">
+    <a class="mini" data-anim="auto" href="producto.html?id=${x.id}">
       <span class="mini-img"><img src="${imgChico(x)}" srcset="${srcsetDe(x)}"
         sizes="(max-width:620px) 46vw, 30vw" alt="${x.full}" loading="lazy"></span>
       <span class="mini-name">${x.name}</span>

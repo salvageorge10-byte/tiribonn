@@ -566,7 +566,7 @@ section{ scroll-margin-top:calc(var(--hdr-h) + 10px); }
 }
 .tow-lead{ margin:16px 0 26px; max-width:34ch; color:var(--on-dark-70); }
 
-.tow-grid{ display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:clamp(14px,1.8vw,28px); }
+.tow-grid{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:clamp(14px,1.8vw,28px); }
 .twl{ display:flex; flex-direction:column; align-items:flex-start; gap:6px; }
 /* cada toalla un poco torcida, como recién tendida */
 .twl-art{
@@ -580,6 +580,8 @@ section{ scroll-margin-top:calc(var(--hdr-h) + 10px); }
 .twl:nth-child(2) .twl-art{ --r:1.6deg; }
 .twl:nth-child(3) .twl-art{ --r:-1deg; }
 .twl:nth-child(4) .twl-art{ --r:2.2deg; }
+.twl:nth-child(5) .twl-art{ --r:-1.6deg; }
+.twl:nth-child(6) .twl-art{ --r:1.2deg; }
 .twl:hover .twl-art{ transform:rotate(0) scale(1.03); }
 .twl-art img{ width:100%; height:100%; object-fit:cover; }
 .twl-name{

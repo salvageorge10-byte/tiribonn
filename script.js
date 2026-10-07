@@ -31,7 +31,7 @@ const TONO = { rockcat: '#FBD3E6', 'devil-inside': '#E4E1EC', 'crazy-penguin': '
 
 $('#shop-grid').innerHTML = PRODUCTS.map(
   (p) => `
-  <article class="prod" data-id="${p.id}" style="--tono:${TONO[p.id] || '#F3E3CC'}">
+  <article class="prod" data-anim="auto" data-id="${p.id}" style="--tono:${TONO[p.id] || '#F3E3CC'}">
     <a class="prod-img" href="producto.html?id=${p.id}" aria-label="Ver ${p.full}" style="--w:${p.cw};--x:${p.cx};--t:${p.cy};--pos:${p.pos}">
       <img src="${imgGrande(p)}" srcset="${srcsetDe(p)}"
            sizes="(max-width:620px) 46vw, (max-width:1100px) 30vw, 22vw"
@@ -64,10 +64,10 @@ if (matchMedia('(hover:hover)').matches) {
 --------------------------------------------------------- */
 $('#tow-grid').innerHTML = TOWELS.map(
   (t) => `
-  <article class="twl">
-    <a class="twl-art" href="producto.html?id=${t.id}" aria-label="Ver ${t.full}">
+  <article class="twl" data-anim="auto">
+    <a class="twl-art es-zoom" href="producto.html?id=${t.id}" aria-label="Ver ${t.full}">
       <img src="${imgChico(t)}" srcset="${srcsetDe(t)}"
-           sizes="(max-width:760px) 44vw, 16vw"
+           sizes="(max-width:620px) 44vw, (max-width:1180px) 30vw, 20vw"
            alt="${t.full} extendida, vista de frente" width="1000" height="1000" loading="lazy">
     </a>
     <a class="twl-name" href="producto.html?id=${t.id}">${t.name}</a>

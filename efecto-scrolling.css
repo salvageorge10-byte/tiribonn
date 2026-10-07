@@ -1,0 +1,93 @@
+/* =====================================================================
+   efecto-scrolling — efectos de El Muelle (elmuellee.vercel.app)
+   Valores exactos del original. Los colores salen de variables para
+   adaptarse a la paleta del proyecto: definí --es-acento, --es-fondo-boton
+   y --es-borde en :root con los tokens del sitio.
+   ===================================================================== */
+:root {
+  --es-entrada: 1.25s;
+  --es-suave: cubic-bezier(.2, .7, .2, 1);
+  --es-acento: #16243F;                 /* color de la flecha de "volver arriba" */
+  --es-fondo-boton: rgba(255, 247, 234, .88);    /* fondo del botón "volver arriba" */
+  --es-borde: rgba(22, 36, 63, .22);      /* borde del botón en reposo */
+  --es-marco: rgba(255, 255, 255, .7);      /* marco interior que aparece en las fotos */
+}
+
+/* Las entradas desde los costados recorren el 100 % del ancho: sin esto aparece scroll horizontal. */
+html, body { overflow-x: clip; }
+
+/* ---------- 1. Entradas al aparecer (Elementor: fadeInLeft / Right / Up) ---------- */
+.js .invisible { visibility: hidden; }
+/* "backwards" y no "both": el estado final ya es el natural, y así la animación
+   terminada no pisa los transform del sitio (por ejemplo una card que sube en hover). */
+.animado { animation-duration: var(--es-entrada); animation-fill-mode: backwards; }
+.fadeInLeft { animation-name: fadeInLeft; }
+.fadeInRight { animation-name: fadeInRight; }
+.fadeInUp { animation-name: fadeInUp; }
+@keyframes fadeInLeft { from { opacity: 0; transform: translate3d(-100%, 0, 0); } to { opacity: 1; transform: none; } }
+@keyframes fadeInRight { from { opacity: 0; transform: translate3d(100%, 0, 0); } to { opacity: 1; transform: none; } }
+@keyframes fadeInUp { from { opacity: 0; transform: translate3d(0, 100%, 0); } to { opacity: 1; transform: none; } }
+
+/* ---------- 2. Tira de fotos continua ---------- */
+.es-tira { --n: 5; position: relative; overflow: hidden; container-type: inline-size; }
+.es-tira__pista { display: flex; width: max-content; animation: es-desliza calc(var(--cantidad, 8) * 5s) linear infinite; }
+.es-tira__pista img { width: calc((100cqw - (var(--n) - 1) * 14px) / var(--n)); aspect-ratio: 3 / 4; object-fit: cover; margin-right: 14px; filter: brightness(.9); transition: filter .4s; }
+.es-tira__pista img:hover { filter: brightness(1.05); }
+.es-tira:hover .es-tira__pista { animation-play-state: paused; }
+@keyframes es-desliza { to { transform: translateX(-50%); } }
+
+/* ---------- 3. Fondo fijo (la foto queda quieta y el contenido pasa por encima) ---------- */
+/* Uso: <section class="es-fondo-fijo" style="--fondo:url('foto.jpg')"> */
+.es-fondo-fijo { background-image: var(--fondo); background-position: center; background-size: cover; background-repeat: no-repeat; background-attachment: fixed; }
+
+/* ---------- 4. Foto que flota ---------- */
+.es-flota { animation: es-flotacion 6s ease-in-out infinite; }
+@keyframes es-flotacion { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+
+/* ---------- 5. Hovers ---------- */
+/* Zoom lento de la foto: en el contenedor (que debe tener overflow: hidden) */
+.es-zoom { overflow: hidden; }
+.es-zoom img { transition: transform 1s var(--es-suave), filter .6s; }
+.es-zoom:hover img { transform: scale(1.06); }
+
+/* Marco interior que aparece al pasar el mouse */
+.es-marco { position: relative; }
+.es-marco::before { content: ""; position: absolute; z-index: 2; inset: 12px; border: 1px solid transparent; transition: border-color .5s; pointer-events: none; }
+.es-marco:hover::before { border-color: var(--es-marco); }
+
+/* Subrayado que se dibuja de izquierda a derecha (menú) */
+.es-subraya { position: relative; }
+.es-subraya::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: left; transition: transform .4s var(--es-suave); }
+.es-subraya:hover::after, .es-subraya[aria-current="page"]::after { transform: scaleX(1); }
+
+/* Flecha que avanza en botones y enlaces */
+.es-flecha::after { content: "→"; display: inline-block; margin-left: 12px; letter-spacing: 0; transition: transform .35s var(--es-suave); }
+.es-flecha:hover::after { transform: translateX(4px); }
+
+/* Elemento que sube al pasar el mouse (logo) */
+.es-sube { display: inline-block; transition: transform .3s; }
+.es-sube:hover { transform: translateY(-8px); }
+
+/* ---------- 6. Botón "volver arriba" ---------- */
+.es-arriba { position: fixed; right: 24px; bottom: 24px; z-index: 30; display: grid; place-items: center; width: 48px; height: 48px; background: var(--es-fondo-boton); backdrop-filter: blur(8px); color: var(--es-acento); border: 1px solid var(--es-borde); border-radius: 50%; opacity: 0; visibility: hidden; transition: opacity .3s, visibility .3s, border-color .3s; }
+.es-arriba:hover { border-color: var(--es-acento); }
+.es-arriba.visible { opacity: 1; visibility: visible; }
+.es-arriba svg { width: 18px; height: 18px; }
+
+/* ---------- Responsive (mismos cortes que El Muelle) ---------- */
+@media (max-width: 1180px) {
+  .es-tira { --n: 4; }
+}
+@media (max-width: 767px) {
+  .es-tira { --n: 2; }
+  /* background-attachment: fixed no funciona bien en celulares (iOS lo ignora o lo pixela) */
+  .es-fondo-fijo { background-attachment: scroll; }
+  .es-arriba { right: 16px; bottom: 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animado { animation: none !important; }
+  .es-tira__pista, .es-flota { animation: none; }
+  .es-zoom:hover img, .es-sube:hover { transform: none; }
+  .es-fondo-fijo { background-attachment: scroll; }
+}

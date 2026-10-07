@@ -8,6 +8,7 @@
 <link rel="preload" href="fonts/schibsted-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/permanent-marker-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="efecto-scrolling.css">
 </head>
 <body>
 
@@ -110,11 +111,11 @@
   <svg class="fh-blob b3" viewBox="0 0 200 200" aria-hidden="true"><path d="M38 30C66 4 120-2 154 20s50 72 30 110-70 66-112 58S-2 150 2 104s8-48 36-74Z"/></svg>
   <svg class="fh-blob b4" viewBox="0 0 200 200" aria-hidden="true"><path d="M52 18c34-22 92-16 122 16s30 88 0 118-86 46-120 26S-4 128 4 86s14-46 48-68Z"/></svg>
 
-  <p class="fh-note n1" aria-hidden="true">Más juego<br>más historias<br>un mundo<br>más colorido</p>
-  <p class="fh-note n2" aria-hidden="true">Arte que<br>acompaña<br>su mundo</p>
+  <p data-anim="fadeInLeft" class="fh-note n1" aria-hidden="true">Más juego<br>más historias<br>un mundo<br>más colorido</p>
+  <p data-anim="fadeInRight" class="fh-note n2" aria-hidden="true">Arte que<br>acompaña<br>su mundo</p>
 
-  <div class="fh-center">
-    <h1 class="fh-logo">
+  <div class="fh-center" data-anim="fadeInUp">
+    <h1 class="fh-logo es-sube">
       <svg class="fh-rays" viewBox="0 0 60 70" aria-hidden="true"><g stroke="#F6CE55" stroke-width="8" stroke-linecap="round"><path d="M40 8 52 20"/><path d="M8 34h40"/><path d="M40 62l12-12"/></g></svg>
       <img src="brand/tiribon-logo-800a.webp" srcset="brand/tiribon-logo-560a.webp 560w, brand/tiribon-logo-800a.webp 800w, brand/tiribon-logo-1100a.webp 1100w"
            sizes="(max-width:860px) calc(100vw - 36px), 780px" alt="TIRIBON" width="1100" height="231" fetchpriority="high">
@@ -125,16 +126,16 @@
       <a class="pill dark" href="#toallas">Ver toallas
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
       </a>
-      <a class="pill ghost" href="#camisetas">Ver camisetas</a>
+      <a class="pill ghost es-flecha" href="#camisetas">Ver camisetas</a>
     </div>
   </div>
 
-  <a class="fh-kid k1" href="producto.html?id=rockcat" aria-label="Ver la camiseta Rockcat">
+  <a data-anim="fadeInLeft" data-anim-mobile="fadeInUp" class="fh-kid k1" href="producto.html?id=rockcat" aria-label="Ver la camiseta Rockcat">
     <img src="images/hero/rockcat-c-600.webp" srcset="images/hero/rockcat-c-400.webp 400w, images/hero/rockcat-c-600.webp 600w, images/hero/rockcat-c-900.webp 900w"
          sizes="(max-width:860px) min(46vw, 300px), (max-width:1180px) clamp(200px, 22vw, 300px), clamp(230px, 24vw, 400px)" width="900" height="1382"
          alt="Niño sonriendo con la camiseta rosa Rockcat">
   </a>
-  <a class="fh-kid k2" href="producto.html?id=crazy-penguin" aria-label="Ver la camiseta Crazy Penguin">
+  <a data-anim="fadeInRight" data-anim-mobile="fadeInUp" class="fh-kid k2" href="producto.html?id=crazy-penguin" aria-label="Ver la camiseta Crazy Penguin">
     <img src="images/hero/crazy-penguin-600.webp" srcset="images/hero/crazy-penguin-400.webp 400w, images/hero/crazy-penguin-600.webp 600w, images/hero/crazy-penguin-900.webp 900w"
          sizes="(max-width:860px) min(46vw, 300px), (max-width:1180px) clamp(200px, 22vw, 300px), clamp(230px, 24vw, 400px)" width="900" height="1281"
          alt="Niña sonriendo con la camiseta amarilla Crazy Penguin">
@@ -145,11 +146,11 @@
 <section class="tow" id="toallas">
   <svg class="wave wave-top" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true"><path d="M0 60V30C200 0 380 50 600 28S980 4 1160 22s220 14 280 2v36Z"/></svg>
   <div class="tow-in">
-    <div class="tow-text">
+    <div class="tow-text" data-anim="fadeInLeft" data-anim-mobile="fadeInUp">
       <p class="kick inv">La otra línea</p>
       <h2>Toallas de microfibra</h2>
       <p class="tow-lead">Ligeras y de secado rápido, para el mar, la piscina o el entrenamiento. Cada una lleva una obra de Lucas Baró.</p>
-      <a class="pill lemon" href="#" data-wa="Hola! Quiero consultar por las toallas de microfibra de TIRIBON.">Consultar toallas</a>
+      <a class="pill lemon es-flecha" href="#" data-wa="Hola! Quiero consultar por las toallas de microfibra de TIRIBON.">Consultar toallas</a>
     </div>
     <div class="tow-grid" id="tow-grid"></div>
   </div>
@@ -160,9 +161,9 @@
 <section class="tees" id="camisetas">
   <div class="tees-in">
     <div class="sec-head">
-      <p class="kick">Colección de camisetas · Próximamente</p>
-      <h2>Camisetas infantiles de algodón orgánico</h2>
-      <p class="sec-lead">Algodón 100&nbsp;% orgánico, suave con la piel, y un dibujo de Lucas Baró en cada una. Están por llegar: si te interesa alguna, escríbenos y te avisamos.</p>
+      <p class="kick" data-anim="fadeInUp">Colección de camisetas · Próximamente</p>
+      <h2 data-anim="fadeInUp">Camisetas infantiles de algodón orgánico</h2>
+      <p class="sec-lead" data-anim="fadeInUp">Algodón 100&nbsp;% orgánico, suave con la piel, y un dibujo de Lucas Baró en cada una. Están por llegar: si te interesa alguna, escríbenos y te avisamos.</p>
     </div>
     <div class="shop-grid" id="shop-grid"></div>
   </div>
@@ -172,16 +173,16 @@
 <!-- ============ POR QUÉ ============ -->
 <section class="why" aria-label="Por qué TIRIBON">
   <ul class="why-in">
-    <li>
+    <li data-anim="auto">
       <div><h3>Diseños exclusivos</h3><p>Ilustraciones únicas de Lucas Baró.</p></div>
     </li>
-    <li>
+    <li data-anim="auto">
       <div><h3>Algodón orgánico</h3><p>Suave e hipoalergénico para los niños.</p></div>
     </li>
-    <li>
+    <li data-anim="auto">
       <div><h3>Secado rápido</h3><p>Microfibra compacta y muy absorbente.</p></div>
     </li>
-    <li>
+    <li data-anim="auto">
       <div><h3>Producción consciente</h3><p>Materiales sostenibles y tintas al agua.</p></div>
     </li>
   </ul>
@@ -189,7 +190,7 @@
 
 <!-- ============ ARTE + CONTACTO ============ -->
 <section class="close">
-  <div class="close-art" id="nosotros">
+  <div class="close-art" id="nosotros" data-anim="fadeInLeft" data-anim-mobile="fadeInUp">
     <p class="kick">El arte detrás de TIRIBON</p>
     <h2>Un lienzo que se lleva puesto</h2>
     <p>Cada diseño nace del trazo y el color de <b>Lucas Baró</b>. Lo pasamos a camisetas y toallas en ediciones limitadas: cuando un dibujo se agota, llega otro nuevo.</p>
@@ -197,7 +198,7 @@
 
   <div class="close-wa" id="contacto">
     <svg class="close-blob" viewBox="0 0 600 420" preserveAspectRatio="none" aria-hidden="true"><path d="M70 30C160-4 330 6 460 16s150 60 136 170-20 190-150 222S140 420 70 380 0 250 6 160 -20 64 70 30Z"/></svg>
-    <div class="close-wa-in">
+    <div class="close-wa-in" data-anim="fadeInRight" data-anim-mobile="fadeInUp">
       <h2>¿Te ayudamos a elegir?</h2>
       <p>Escríbenos y te confirmamos talla, stock y precio en el momento.</p>
       <a class="pill lemon big" href="#" data-wa="Hola! Quiero consultar por las camisetas y toallas de TIRIBON.">
@@ -217,6 +218,11 @@
 
 <script src="catalogo.js"></script>
 <script src="comun.js"></script>
+<a href="#top" class="es-arriba" aria-label="Volver arriba">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</a>
+
 <script src="script.js"></script>
+<script src="efecto-scrolling.js"></script>
 </body>
 </html>

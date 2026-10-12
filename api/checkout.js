@@ -60,6 +60,8 @@ export async function POST(request) {
     return responder(200, { url: sesion.url });
   } catch (err) {
     console.error(err);
-    return responder(502, { error: 'No pudimos iniciar el pago. Inténtalo de nuevo en unos minutos.' });
+    // Solo en las versiones de prueba: el motivo real ayuda a configurar.
+    const detalle = process.env.VERCEL_ENV === 'production' ? '' : ` (${err.message})`;
+    return responder(502, { error: `No pudimos iniciar el pago. Inténtalo de nuevo en unos minutos.${detalle}` });
   }
 }

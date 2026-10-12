@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Pedido confirmado — TIRIBON</title>
+<link rel="preload" href="fonts/schibsted-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css">
+<style>
+  .ok{ min-height:100vh; display:flex; flex-direction:column; align-items:center; padding:32px var(--gut) 64px; background:var(--paper); }
+  .ok-logo img{ width:200px; height:auto; display:block; margin-bottom:36px; }
+  .ok-card{ width:100%; max-width:560px; background:var(--cream); border:3px solid var(--ink); border-radius:8px; padding:clamp(22px,5vw,36px); }
+  .ok-card h1{ font-family:var(--disp); font-weight:400; font-size:clamp(1.7rem,5vw,2.3rem); line-height:1.1; margin-bottom:10px; }
+  .ok-num{ display:inline-block; background:var(--lemon); font-weight:800; padding:4px 10px; border-radius:4px; margin:4px 0 18px; font-variant-numeric:tabular-nums; }
+  .ok-card p{ line-height:1.55; color:var(--ink-70); }
+  .ok-items{ list-style:none; margin:22px 0 0; padding:0; border-top:2px solid var(--ink); }
+  .ok-items li{ display:flex; justify-content:space-between; gap:16px; padding:11px 0; border-bottom:1px solid var(--ink-15); }
+  .ok-items li span:last-child{ white-space:nowrap; font-variant-numeric:tabular-nums; }
+  .ok-items li.tot{ font-weight:800; border-bottom:0; }
+  .ok-ship{ margin-top:18px; }
+  .ok-ship b{ color:var(--ink); }
+  .ok-next{ margin-top:22px; padding-top:18px; border-top:1px solid var(--ink-15); font-size:.92rem; }
+  .ok-acts{ display:flex; flex-wrap:wrap; gap:10px; margin-top:26px; }
+  .ok-acts > *{ flex:1 1 200px; }
+  .ok-msg{ text-align:center; }
+</style>
+</head>
+<body>
+
+<main class="ok">
+  <a class="ok-logo" href="index.html" aria-label="TIRIBON — inicio">
+    <img src="brand/tiribon-logo-480.webp" alt="TIRIBON" width="480" height="101">
+  </a>
+
+  <section class="ok-card" id="ok" aria-live="polite">
+    <p class="ok-msg">Confirmando tu pedido…</p>
+  </section>
+</main>
+
+<script src="catalogo.js"></script>
+<script>
+(async () => {
+  const card = document.getElementById('ok');
+  const id = new URLSearchParams(location.search).get('pedido') || '';
+
+  // Construido con textContent: los datos vienen de lo que escribió el cliente.
+  const el = (tag, attrs = {}, ...hijos) => {
+    const n = document.createElement(tag);
+    Object.assign(n, attrs);
+    n.append(...hijos);
+    return n;
+  };
+
+  const fallo = (titulo, texto) => {
+    card.replaceChildren(
+      el('h1', {}, titulo),
+      el('p', {}, texto),
+      el('div', { className: 'ok-acts' },
+        el('a', { className: 'wa-btn', href: waLink(`Hola! Acabo de hacer un pago en TIRIBON y quería confirmar mi pedido.`), target: '_blank', rel: 'noopener' }, 'Escríbenos por WhatsApp'),
+        el('a', { className: 'btn-solid', href: 'index.html' }, 'Volver a la tienda')),
+    );
+  };
+
+  let p;
+  try {
+    const res = await fetch(`/api/pedido?id=${encodeURIComponent(id)}`);
+    p = await res.json();
+    if (!res.ok) throw new Error(p.error);
+  } catch {
+    fallo('No pudimos mostrar tu pedido',
+      'Si el pago se hizo, está registrado igual y te llegará un email de confirmación. Si no lo recibes en unos minutos, escríbenos.');
+    return;
+  }
+
+  // Pagado: el carrito ya no hace falta.
+  try { localStorage.removeItem('tiribon-cart'); } catch {}
+
+  const nombre = p.nombre.split(' ')[0];
+  card.replaceChildren(
+    el('h1', {}, `¡Gracias${nombre ? `, ${nombre}` : ''}! Tu pedido está confirmado.`),
+    el('span', { className: 'ok-num' }, `Pedido ${p.numero}`),
+    el('p', {}, 'Hemos recibido tu pago y ya estamos preparando el paquete.'),
+    el('ul', { className: 'ok-items' },
+      ...p.items.map((i) => el('li', {}, el('span', {}, `${i.cantidad} × ${i.nombre}`), el('span', {}, i.importe))),
+      el('li', { className: 'tot' }, el('span', {}, 'Total'), el('span', {}, p.total))),
+    el('p', { className: 'ok-ship' }, el('b', {}, 'Lo enviamos a: '), `${p.nombre} — ${p.direccion}`),
+    el('p', { className: 'ok-next' },
+      'Te mandamos la confirmación a ', el('b', {}, p.email),
+      '. Te escribiremos de nuevo cuando salga el envío. Si no ves el email, revisa la carpeta de spam.'),
+    el('div', { className: 'ok-acts' },
+      el('a', { className: 'btn-solid', href: 'index.html' }, 'Volver a la tienda'),
+      el('a', { className: 'wa-btn', href: waLink(`Hola! Tengo una consulta sobre mi pedido ${p.numero}.`), target: '_blank', rel: 'noopener' }, '¿Dudas? WhatsApp')),
+  );
+})();
+</script>
+</body>
+</html>

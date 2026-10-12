@@ -44,7 +44,9 @@ const cartBtn = $('#cart-toggle');
 const itemsEl = $('#cart-items');
 const countEl = $('#cart-count');
 const sumEl = $('#cart-summary-count');
+const payBtn = $('#cart-pay');
 const waBtn = $('#cart-wa');
+const cartErr = $('#cart-err');
 const totalEl = $('#cart-total');
 
 const saveCart = () => localStorage.setItem(CART_KEY, JSON.stringify(cart));
@@ -87,19 +89,11 @@ function changeQty(id, delta) {
 }
 
 /* ---------------------------------------------------------
-   Datos del cliente (formulario del carrito)
+   Pedido por WhatsApp (alternativa al pago con tarjeta)
+   Ya no pide nombre ni teléfono: WhatsApp muestra quién escribe.
 --------------------------------------------------------- */
-const cfNombre = $('#cf-nombre');
-const cfTelefono = $('#cf-telefono');
-const cfErr = $('#cf-err');
-
-[cfNombre, cfTelefono].forEach((el) => el.addEventListener('input', () => { cfErr.hidden = true; }));
-
 function buildMessage() {
   if (!cart.length) return '';
-
-  const nombre = cfNombre.value.trim();
-  const telefono = cfTelefono.value.trim();
 
   const pad = (n) => String(n).padStart(2, '0');
   const hoy = new Date();
@@ -112,8 +106,6 @@ function buildMessage() {
     ...cart.map(linea),
     `*Total: ${precio(totalPrice())}*`,
     '',
-    `Nombre: ${nombre}`,
-    `Teléfono: ${telefono}`,
     '¿Me confirmáis stock y cómo hago el pago?',
   ].join('\n');
 }
@@ -121,6 +113,7 @@ function buildMessage() {
 function renderCart() {
   if (!cart.length) {
     itemsEl.innerHTML = '<p class="c-empty">Todavía no has añadido nada al pedido.</p>';
+    payBtn.setAttribute('disabled', 'true');
     waBtn.setAttribute('disabled', 'true');
   } else {
     itemsEl.innerHTML = cart.map((i) => `
@@ -148,8 +141,10 @@ function renderCart() {
         renderCart();
       });
     });
+    payBtn.removeAttribute('disabled');
     waBtn.removeAttribute('disabled');
   }
+  cartErr.hidden = true;
 
   const n = totalCount();
   countEl.textContent = n;
@@ -158,14 +153,57 @@ function renderCart() {
 }
 
 waBtn.addEventListener('click', () => {
-  if (!cfNombre.value.trim() || !cfTelefono.value.trim()) {
-    cfErr.hidden = false;
-    (!cfNombre.value.trim() ? cfNombre : cfTelefono).focus();
-    return;
-  }
   const msg = buildMessage();
   if (msg) window.open(waLink(msg), '_blank', 'noopener');
 });
+
+/* ---------------------------------------------------------
+   Pago con Stripe
+   El servidor (api/checkout.js) pone los precios: acá solo viajan
+   ids y cantidades. Si todo va bien, se sale a la página de Stripe.
+--------------------------------------------------------- */
+function showCartError(msg) {
+  cartErr.textContent = msg;
+  cartErr.hidden = false;
+}
+
+payBtn.addEventListener('click', async () => {
+  if (!cart.length) return;
+  const label = payBtn.textContent;
+  payBtn.setAttribute('disabled', 'true');
+  payBtn.textContent = 'Abriendo el pago…';
+  cartErr.hidden = true;
+
+  try {
+    const res = await fetch('/api/checkout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ items: cart.map(({ id, qty }) => ({ id, qty })) }),
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok || !data.url) throw new Error(data.error || 'No pudimos iniciar el pago. Inténtalo de nuevo.');
+    window.location.href = data.url;
+  } catch (err) {
+    showCartError(err.message);
+    payBtn.textContent = label;
+    payBtn.removeAttribute('disabled');
+  }
+});
+
+/* Con el botón "atrás" el navegador puede devolver la página tal cual
+   se dejó, con el botón todavía en "Abriendo el pago…". */
+window.addEventListener('pageshow', (e) => {
+  if (!e.persisted) return;
+  payBtn.textContent = 'Pagar ahora';
+  renderCart();
+});
+
+/* Al volver de Stripe sin pagar, el pedido sigue en el carrito. */
+if (new URLSearchParams(location.search).get('pago') === 'cancelado') {
+  history.replaceState(null, '', location.pathname + location.hash);
+  openCart();
+  setTimeout(() => showCartError('El pago no se completó. Tu pedido sigue aquí por si quieres intentarlo de nuevo.'), 0);
+}
 
 
 /* Delegado en document: la grilla se dibuja despues de este archivo. */

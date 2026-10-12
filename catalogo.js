@@ -172,7 +172,8 @@ const ALL = [...PRODUCTS, ...TOWELS];
 /* Toallas: US$45,00 (cambiado a pedido el 29/09/2026; antes US$30,00);
    Fondo del Mar y Pulpo, US$49,00 (agregadas el 07/10/2026).
    Camisetas: marcadas «soon», se ven pero todavía no se venden.
-   El cobro sigue siendo por WhatsApp: no hay enlaces de pago. */
+   El cobro es con Stripe (api/checkout.js) y los precios que se cobran
+   salen de api/_productos.js: un cambio de precio va en los dos lados. */
 const precio = (n) => `US$${n.toFixed(2)}`;
 const find = (id) => ALL.find((x) => x.id === id);
 

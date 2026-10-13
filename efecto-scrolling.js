@@ -7,9 +7,12 @@ const esMobile = matchMedia('(max-width: 767px)').matches;
 
 // 1. Entradas al aparecer: cada elemento con data-anim entra una sola vez al llegar a pantalla.
 //    data-anim-mobile permite otra entrada en celular (en El Muelle, todo entra desde abajo).
+//    Los que entran juntos (una fila de la grilla) se escalonan 80 ms para no aparecer en bloque.
 const esObservador = new IntersectionObserver((entradas) => {
+  let orden = 0;
   entradas.forEach(({ isIntersecting, target }) => {
     if (!isIntersecting) return;
+    target.style.setProperty('--es-retraso', `${Math.min(orden++, 4) * 80}ms`);
     target.classList.remove('invisible');
     target.classList.add('animado', target.dataset.animActiva);
     esObservador.unobserve(target);

@@ -20,6 +20,7 @@ export async function GET(request) {
 
   try {
     const p = await leerPedido(id);
+    if (p.marcas.tienda !== 'tiribon') return responder(404, { error: 'No encontramos ese pedido' });
     if (!p.pagado) return responder(402, { error: 'El pago todavía no se ha completado' });
     const { numero, nombre, email, direccion, items, envio, total } = p;
     return responder(200, {

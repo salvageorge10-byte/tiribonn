@@ -24,7 +24,9 @@ export async function POST(request) {
   }
 
   const evento = JSON.parse(cuerpo);
-  if (evento.type !== 'checkout.session.completed') {
+  // La cuenta de Stripe es compartida con otras webs de la clienta:
+  // solo interesan los pagos que creó api/checkout.js.
+  if (evento.type !== 'checkout.session.completed' || evento.data.object.metadata?.tienda !== 'tiribon') {
     return new Response('Ignorado', { status: 200 });
   }
 

@@ -35,6 +35,8 @@ export async function leerStock() {
    vez por la última unidad) y la tienda tiene que avisar al cliente. */
 export async function descontarStock(productoStripe, cantidad) {
   const p = await stripe(`/products/${encodeURIComponent(productoStripe)}`);
+  // Nunca tocar productos que no son de TIRIBON (la cuenta es compartida).
+  if (!p.metadata?.tiribon_id) return { tiribonId: null, nombre: p.name, quedan: 0 };
   const antes = Number.parseInt(p.metadata?.stock, 10) || 0;
   const despues = antes - cantidad;
   await stripe(`/products/${encodeURIComponent(productoStripe)}`, {

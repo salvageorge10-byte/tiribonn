@@ -67,13 +67,19 @@
   </div>
   <div class="drawer-foot">
     <p class="cf-err" id="cart-err" role="alert" hidden></p>
-    <div class="drawer-sum">
-      <span id="cart-summary-count">0 artículos</span>
-      <span id="cart-total"></span>
-    </div>
+    <label class="ship" for="cart-pais">
+      <span>Enviar a</span>
+      <select id="cart-pais">
+        <option value="">Elige el país…</option>
+      </select>
+    </label>
+    <dl class="drawer-lines">
+      <div><dt id="cart-summary-count">0 artículos</dt><dd id="cart-sub"></dd></div>
+      <div><dt>Envío</dt><dd id="cart-ship">—</dd></div>
+      <div class="drawer-sum"><dt>Total</dt><dd id="cart-total"></dd></div>
+    </dl>
     <p class="drawer-note">Pago seguro con tarjeta, Apple Pay o Google Pay. En el siguiente paso te pedimos el email y la dirección de envío.</p>
     <button class="wa-btn" id="cart-pay" disabled>Pagar ahora</button>
-    <button class="cart-alt" id="cart-wa" disabled>Prefiero pedir por WhatsApp</button>
   </div>
 </aside>
 

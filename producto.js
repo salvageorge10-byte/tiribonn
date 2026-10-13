@@ -80,8 +80,8 @@ if (!prod) {
         'Tejido técnico ultra absorbente y de secado rápido',
         'Compacta y ligera: ocupa un espacio mínimo en tu bolsa',
         'Estampación digital de alta definición, colores vibrantes lavado tras lavado',
-        'Diseño exclusivo ilustrado por <b>Lucas Baró</b>',
-        'El pago y el envío se coordinan por WhatsApp',
+        'Diseño exclusivo ilustrado por <b>Lucas Baró</b>, en tirada limitada',
+        'Pago seguro con tarjeta · Envíos a México, España y República Dominicana',
       ]
     : [
         '100% algodón orgánico certificado',
@@ -98,6 +98,7 @@ if (!prod) {
   $('#pdp-price').textContent = prod.soon ? 'Próximamente' : precio(prod.price);
   $('#pdp-price').classList.toggle('is-price', !prod.soon);
   if (prod.soon) $('.pdp-buy').hidden = true;
+  else $('#pdp-price').insertAdjacentHTML('afterend', `<p class="pdp-left" data-stock-for="${prod.id}"></p>`);
 
   /* ---- cantidad y pedido ---- */
   let qty = 1;
@@ -107,18 +108,20 @@ if (!prod) {
     qtyEl.textContent = qty;
   });
   $('#pdp-plus').addEventListener('click', () => {
-    qty = Math.min(20, qty + 1);
+    qty = Math.max(1, Math.min(20, quedan(prod.id), qty + 1));
     qtyEl.textContent = qty;
   });
 
+  /* comun.js lo apaga y lo pone en "Agotada" cuando llega el stock. */
   const addBtn = $('#pdp-add');
+  addBtn.dataset.stockId = prod.id;
   addBtn.addEventListener('click', () => {
-    addToCart(prod.id, qty);
-    addBtn.classList.add('done');
-    addBtn.textContent = 'Añadido al pedido';
+    const ok = addToCart(prod.id, qty);
+    addBtn.classList.toggle('done', ok);
+    addBtn.textContent = ok ? 'Añadido al pedido' : 'No quedan más';
     setTimeout(() => {
       addBtn.classList.remove('done');
-      addBtn.textContent = 'Añadir al pedido';
+      if (!addBtn.disabled) addBtn.textContent = 'Añadir al pedido';
     }, 1400);
   });
 

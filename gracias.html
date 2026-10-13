@@ -83,6 +83,7 @@
     el('p', {}, 'Hemos recibido tu pago y ya estamos preparando el paquete.'),
     el('ul', { className: 'ok-items' },
       ...p.items.map((i) => el('li', {}, el('span', {}, `${i.cantidad} × ${i.nombre}`), el('span', {}, i.importe))),
+      el('li', {}, el('span', {}, 'Envío'), el('span', {}, p.envio)),
       el('li', { className: 'tot' }, el('span', {}, 'Total'), el('span', {}, p.total))),
     el('p', { className: 'ok-ship' }, el('b', {}, 'Lo enviamos a: '), `${p.nombre} — ${p.direccion}`),
     el('p', { className: 'ok-next' },

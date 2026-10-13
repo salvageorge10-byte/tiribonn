@@ -19,9 +19,13 @@ export async function GET(request) {
   }
 
   try {
-    const pedido = await leerPedido(id);
-    if (!pedido.pagado) return responder(402, { error: 'El pago todavía no se ha completado' });
-    return responder(200, pedido);
+    const p = await leerPedido(id);
+    if (!p.pagado) return responder(402, { error: 'El pago todavía no se ha completado' });
+    const { numero, nombre, email, direccion, items, envio, total } = p;
+    return responder(200, {
+      numero, nombre, email, direccion, envio, total,
+      items: items.map(({ nombre, cantidad, importe }) => ({ nombre, cantidad, importe })),
+    });
   } catch (err) {
     console.error(err);
     return responder(404, { error: 'No encontramos ese pedido' });

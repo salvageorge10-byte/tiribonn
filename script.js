@@ -71,7 +71,7 @@ $('#tow-grid').innerHTML = TOWELS.map(
            alt="${t.full} extendida, vista de frente" width="1000" height="1000" loading="lazy">
     </a>
     <a class="twl-name" href="producto.html?id=${t.id}">${t.name}</a>
-    <p class="twl-price">${precio(t.price)}</p>
+    <p class="twl-price">${precio(t.price)} <span class="twl-left" data-stock-for="${t.id}"></span></p>
     <button class="twl-add" data-add="${t.id}">Añadir al pedido</button>
   </article>`
 ).join('');

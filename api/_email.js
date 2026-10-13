@@ -19,6 +19,10 @@ const tabla = (p) => `
         <td style="padding:8px 0;border-bottom:1px solid #eee;text-align:right;white-space:nowrap">${esc(i.importe)}</td>
       </tr>`).join('')}
     <tr>
+      <td style="padding:8px 0;border-bottom:1px solid #eee">Envío</td>
+      <td style="padding:8px 0;border-bottom:1px solid #eee;text-align:right;white-space:nowrap">${esc(p.envio)}</td>
+    </tr>
+    <tr>
       <td style="padding:12px 0 0;font-weight:700">Total</td>
       <td style="padding:12px 0 0;font-weight:700;text-align:right">${esc(p.total)}</td>
     </tr>
@@ -52,11 +56,18 @@ function emailCliente(p) {
   };
 }
 
-function emailTienda(p) {
+function emailTienda(p, sobreventa) {
+  const alerta = sobreventa.length ? `
+      <p style="margin:0 0 20px;padding:12px 14px;background:#FDE2EE;border-radius:6px;font-size:15px;line-height:1.5">
+        <b>Atención: se vendió más de lo que había.</b> Dos personas compraron casi a la vez la última unidad de
+        ${sobreventa.map((s) => `<b>${esc(s.nombre)}</b> (faltan ${-s.quedan})`).join(', ')}.
+        Escríbele al cliente y, si no puedes reponerla, devuélvele el dinero desde Stripe (Pagos → este pago → Reembolsar).
+      </p>` : '';
   return {
-    asunto: `Nueva venta ${p.numero} — ${p.total}`,
+    asunto: `${sobreventa.length ? '⚠️ ' : ''}Nueva venta ${p.numero} — ${p.total}`,
     html: marco(`
       <h1 style="margin:0 0 16px;font-size:20px">Nueva venta: ${esc(p.numero)}</h1>
+      ${alerta}
       ${tabla(p)}
       <p style="margin:24px 0 0;font-size:15px;line-height:1.6">
         <b>Cliente:</b> ${esc(p.nombre)}<br>
@@ -85,14 +96,16 @@ async function enviar({ para, responderA, asunto, html }) {
   if (!res.ok) throw new Error(`Resend ${res.status}: ${await res.text()}`);
 }
 
-export async function avisarPedido(p) {
+/* Devuelve false si no se mandó nada porque Resend no está configurado. */
+export async function avisarPedido(p, sobreventa = []) {
   if (!process.env.RESEND_API_KEY) {
     console.warn(`Sin RESEND_API_KEY: no se mandan emails del pedido ${p.numero}`);
-    return;
+    return false;
   }
   const tienda = process.env.EMAIL_TIENDA;
   const envios = [];
   if (p.email) envios.push(enviar({ para: p.email, responderA: tienda, ...emailCliente(p) }));
-  if (tienda) envios.push(enviar({ para: tienda, responderA: p.email, ...emailTienda(p) }));
+  if (tienda) envios.push(enviar({ para: tienda, responderA: p.email, ...emailTienda(p, sobreventa) }));
   await Promise.all(envios);
+  return true;
 }

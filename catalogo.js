@@ -173,7 +173,8 @@ const ALL = [...PRODUCTS, ...TOWELS];
    Fondo del Mar y Pulpo, US$49,00 (agregadas el 07/10/2026).
    Camisetas: marcadas «soon», se ven pero todavía no se venden.
    El cobro es con Stripe (api/checkout.js) y los precios que se cobran
-   salen de api/_productos.js: un cambio de precio va en los dos lados. */
+   salen de api/_productos.js: un cambio de precio va en los dos lados.
+   El stock y el costo de envío los manda /api/tienda (ver comun.js). */
 const precio = (n) => `US$${n.toFixed(2)}`;
 const find = (id) => ALL.find((x) => x.id === id);
 

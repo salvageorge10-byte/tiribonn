@@ -14,7 +14,7 @@ const esObservador = new IntersectionObserver((entradas) => {
     target.classList.add('animado', target.dataset.animActiva);
     esObservador.unobserve(target);
   });
-}, { rootMargin: '0px 0px 15% 0px' }); // arranca un poco antes de que el bloque llegue a la pantalla
+});
 
 // data-anim="auto": la dirección sale de dónde cae el bloque dentro de su contenedor
 // (tercio izquierdo → izquierda, tercio derecho → derecha, centro → abajo).

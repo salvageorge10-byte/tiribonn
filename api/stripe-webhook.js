@@ -19,7 +19,7 @@ export async function POST(request) {
   const cuerpo = await request.text();
   const firma = request.headers.get('stripe-signature');
 
-  if (!firmaValida(cuerpo, firma, process.env.STRIPE_WEBHOOK_SECRET)) {
+  if (!firmaValida(cuerpo, firma, process.env.STRIPE_WEBHOOK_SECRET?.trim())) {
     return new Response('Firma no válida', { status: 400 });
   }
 

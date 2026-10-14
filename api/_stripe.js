@@ -23,7 +23,8 @@ function aFormulario(obj, prefijo = '', out = new URLSearchParams()) {
 }
 
 export async function stripe(ruta, { metodo = 'GET', datos } = {}) {
-  const clave = process.env.STRIPE_SECRET_KEY;
+  // trim: un espacio o salto de línea pegado en Vercel no se ve y rompe la clave.
+  const clave = process.env.STRIPE_SECRET_KEY?.trim();
   if (!clave) throw new Error('Falta STRIPE_SECRET_KEY en las variables de entorno');
 
   const res = await fetch(`${API}${ruta}`, {

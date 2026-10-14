@@ -82,6 +82,9 @@ export async function POST(request) {
         // La cuenta de Stripe puede compartirse con otros negocios: el
         // webhook solo procesa los pagos que llevan esta marca.
         metadata: { tienda: 'tiribon' },
+        // En el resumen de la tarjeta sale el nombre de la cuenta
+        // (Armoenergía); el sufijo deja claro que fue una compra en TIRIBON.
+        payment_intent_data: { statement_descriptor_suffix: 'TIRIBON' },
         // Media hora para pagar: acota el tiempo en que dos personas
         // pueden estar pagando la misma última unidad.
         expires_at: Math.floor(Date.now() / 1000) + 30 * 60,

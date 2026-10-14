@@ -13,11 +13,11 @@ export const MONEDA = 'usd';
 
 /* Envío según el país, lo paga el cliente. Precio en dólares.
    El orden es el del selector del carrito.
-   PENDIENTE DE CONFIRMAR CON LA CLIENTA: los importes son provisorios. */
+   US$10 a cualquier país (confirmado por la clienta, 14/10/2026). */
 export const ENVIOS = {
-  MX: { nombre: 'México',               precio: 15 },
+  MX: { nombre: 'México',               precio: 10 },
   ES: { nombre: 'España',               precio: 10 },
-  DO: { nombre: 'República Dominicana', precio: 15 },
+  DO: { nombre: 'República Dominicana', precio: 10 },
 };
 
 /* Máximo de unidades por producto en un mismo pedido. */

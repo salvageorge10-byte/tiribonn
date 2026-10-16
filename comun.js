@@ -118,7 +118,7 @@ function renderCart() {
       const aviso = max <= 0
         ? '<p class="c-stock is-out">Agotada: quítala para poder pagar</p>'
         : i.qty > max ? `<p class="c-stock is-out">Solo quedan ${max}</p>`
-        : max <= 3 ? `<p class="c-stock">${max === 1 ? 'Última unidad' : `Quedan ${max}`}</p>` : '';
+        : `<p class="c-stock">${max === 1 ? 'Última unidad' : `Quedan ${max}`}</p>`;
       return `
       <div class="c-row" data-row="${i.id}">
         <img src="${i.thumb || i.img}" alt="" loading="lazy">
@@ -184,7 +184,8 @@ function paintStock() {
   });
   $$('[data-stock-for]').forEach((el) => {
     const n = quedan(el.dataset.stockFor);
-    el.textContent = n <= 0 ? 'Agotada' : n <= 3 ? (n === 1 ? '¡Última unidad!' : `¡Quedan ${n}!`) : '';
+    // Siempre a la vista: son tiradas cortas y saber cuántas quedan ayuda a decidir.
+    el.textContent = n <= 0 ? 'Agotada' : n === 1 ? '¡Última unidad!' : n <= 3 ? `¡Quedan ${n}!` : `Quedan ${n}`;
     el.classList.toggle('is-out', n <= 0);
   });
 }

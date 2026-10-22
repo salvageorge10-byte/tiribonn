@@ -36,6 +36,8 @@ export async function leerPedido(sessionId) {
     })),
     envio: costoEnvio ? formatoPrecio(costoEnvio, s.currency) : 'Gratis',
     total: formatoPrecio(s.amount_total, s.currency),
+    valor: (s.amount_total ?? 0) / 100,
+    moneda: (s.currency || 'usd').toUpperCase(),
   };
 }
 

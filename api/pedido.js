@@ -22,9 +22,9 @@ export async function GET(request) {
     const p = await leerPedido(id);
     if (p.marcas.tienda !== 'tiribon') return responder(404, { error: 'No encontramos ese pedido' });
     if (!p.pagado) return responder(402, { error: 'El pago todavía no se ha completado' });
-    const { numero, nombre, email, direccion, items, envio, total } = p;
+    const { numero, nombre, email, direccion, items, envio, total, valor, moneda } = p;
     return responder(200, {
-      numero, nombre, email, direccion, envio, total,
+      numero, nombre, email, direccion, envio, total, valor, moneda,
       items: items.map(({ nombre, cantidad, importe }) => ({ nombre, cantidad, importe })),
     });
   } catch (err) {

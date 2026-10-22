@@ -20,6 +20,7 @@ if (!prod) {
   /* ---- cabecera del documento ---- */
   document.title = `${prod.full} — TIRIBON`;
   $('#meta-desc').setAttribute('content', prod.desc);
+  px('ViewContent', { content_ids: [prod.id], content_name: prod.full, content_type: 'product', value: prod.price || 0, currency: 'USD' });
 
   /* ---- ruta ---- */
   const cat = $('#crumb-cat');

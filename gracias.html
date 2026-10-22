@@ -25,6 +25,7 @@
   .ok-acts > *{ flex:1 1 200px; }
   .ok-msg{ text-align:center; }
 </style>
+<script src="pixel.js"></script>
 </head>
 <body>
 
@@ -72,6 +73,16 @@
       'Si el pago se hizo, está registrado igual y te llegará un email de confirmación. Si no lo recibes en unos minutos, escríbenos.');
     return;
   }
+
+  // Compra para Meta, una sola vez por pedido aunque se recargue la página.
+  // eventID = sesión de Stripe, por si un día se manda también desde el servidor.
+  try {
+    const marca = `tiribon-px-${id}`;
+    if (!localStorage.getItem(marca)) {
+      px('Purchase', { value: p.valor, currency: p.moneda, num_items: p.items.reduce((n, i) => n + i.cantidad, 0) }, { eventID: id });
+      localStorage.setItem(marca, '1');
+    }
+  } catch {}
 
   // Pagado: el carrito ya no hace falta.
   try { localStorage.removeItem('tiribon-cart'); } catch {}

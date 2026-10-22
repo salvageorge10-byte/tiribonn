@@ -92,6 +92,7 @@ function addToCart(id, qty = 1) {
   if (hit) hit.qty += suma;
   else cart.push({ id, name: p.full, color: p.color, img: p.img, thumb: imgChico(p), type: p.type, qty: suma });
   saveCart();
+  px('AddToCart', { content_ids: [id], content_name: p.full, content_type: 'product', contents: [{ id, quantity: suma }], value: (p.price || 0) * suma, currency: 'USD' });
   renderCart();
   cartBtn.classList.add('is-bump');
   setTimeout(() => cartBtn.classList.remove('is-bump'), 600);
@@ -229,6 +230,12 @@ payBtn.addEventListener('click', async () => {
   payBtn.setAttribute('disabled', 'true');
   payBtn.textContent = 'Abriendo el pago…';
   cartErr.hidden = true;
+  px('InitiateCheckout', {
+    content_ids: cart.map((i) => i.id), content_type: 'product',
+    contents: cart.map(({ id, qty }) => ({ id, quantity: qty })),
+    num_items: cart.reduce((n, i) => n + i.qty, 0),
+    value: cart.reduce((n, i) => n + (find(i.id)?.price || 0) * i.qty, 0), currency: 'USD',
+  });
 
   try {
     const res = await fetch('/api/checkout', {

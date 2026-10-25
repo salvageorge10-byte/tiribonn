@@ -43,8 +43,11 @@ export async function POST(request) {
       await marcarPedido(pedido.id, 'stock_descontado');
     }
 
+    // `emails_enviados` es la marca de antes, cuando salían los dos juntos.
     if (!pedido.marcas.emails_enviados) {
-      if (await avisarPedido(pedido, sobreventa)) await marcarPedido(pedido.id, 'emails_enviados');
+      const { hechos, fallo } = await avisarPedido(pedido, sobreventa, pedido.marcas);
+      for (const marca of hechos) await marcarPedido(pedido.id, marca);
+      if (fallo) throw new Error(`Falló algún email del pedido ${pedido.numero}`);
     }
   } catch (err) {
     // 500 hace que Stripe reintente más tarde.

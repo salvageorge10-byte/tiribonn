@@ -74,6 +74,9 @@ function emailTienda(p, sobreventa) {
         <b>Email:</b> ${esc(p.email)}<br>
         <b>Teléfono:</b> ${esc(p.telefono)}<br>
         <b>Enviar a:</b> ${esc(p.direccion)}
+      </p>
+      <p style="margin:20px 0 0;font-size:13px;color:#666;line-height:1.5">
+        El pago ya está cobrado en Stripe. Respondiendo a este email le escribes directamente al cliente.
       </p>`),
   };
 }
@@ -96,16 +99,26 @@ async function enviar({ para, responderA, asunto, html }) {
   if (!res.ok) throw new Error(`Resend ${res.status}: ${await res.text()}`);
 }
 
-/* Devuelve false si no se mandó nada porque Resend no está configurado. */
-export async function avisarPedido(p, sobreventa = []) {
+/* Manda los dos emails por separado: si uno falla, el otro sale igual.
+   `yaEnviados` son las marcas del pedido, para no repetir el que ya salió
+   cuando Stripe reintenta. Devuelve las marcas nuevas a guardar; tira
+   error si alguno falló, para que Stripe vuelva a intentar ese. */
+export async function avisarPedido(p, sobreventa = [], yaEnviados = {}) {
   if (!process.env.RESEND_API_KEY) {
     console.warn(`Sin RESEND_API_KEY: no se mandan emails del pedido ${p.numero}`);
-    return false;
+    return { hechos: [], fallo: false };
   }
   const tienda = process.env.EMAIL_TIENDA;
   const envios = [];
-  if (p.email) envios.push(enviar({ para: p.email, responderA: tienda, ...emailCliente(p) }));
-  if (tienda) envios.push(enviar({ para: tienda, responderA: p.email, ...emailTienda(p, sobreventa) }));
-  await Promise.all(envios);
-  return true;
+  if (tienda && !yaEnviados.email_tienda) {
+    envios.push(['email_tienda', enviar({ para: tienda, responderA: p.email, ...emailTienda(p, sobreventa) })]);
+  }
+  if (p.email && !yaEnviados.email_cliente) {
+    envios.push(['email_cliente', enviar({ para: p.email, responderA: tienda, ...emailCliente(p) })]);
+  }
+  const res = await Promise.allSettled(envios.map(([, envio]) => envio));
+  const fallos = res.filter((r) => r.status === 'rejected').map((r) => r.reason);
+  fallos.forEach((e) => console.error(e));
+  const hechos = envios.filter((_, i) => res[i].status === 'fulfilled').map(([marca]) => marca);
+  return { hechos, fallo: fallos.length > 0 };
 }

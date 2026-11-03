@@ -99,7 +99,8 @@ if (!prod) {
   $('#pdp-price').textContent = prod.soon ? 'Próximamente' : precio(prod.price);
   $('#pdp-price').classList.toggle('is-price', !prod.soon);
   if (prod.soon) $('.pdp-buy').hidden = true;
-  else $('#pdp-price').insertAdjacentHTML('afterend', `<p class="pdp-left" data-stock-for="${prod.id}"></p>`);
+  else $('#pdp-price').insertAdjacentHTML('afterend', `<p class="pdp-left" data-stock-for="${prod.id}"></p>` +
+    (esToalla ? `<p class="pdp-mayor">Por mayor: desde ${MAYORISTA.desde} toallas, <b>${precio(MAYORISTA.precio)}</b> cada una. Puedes combinar diseños.</p>` : ''));
 
   /* ---- cantidad y pedido ---- */
   let qty = 1;

@@ -6,7 +6,7 @@
    Stripe le pide al cliente email, nombre, teléfono y dirección.
    ========================================================= */
 
-import { PRODUCTOS, MONEDA, ENVIOS, MAX_UNIDADES } from './_productos.js';
+import { PRODUCTOS, MONEDA, ENVIOS, MAX_UNIDADES, MAYORISTA } from './_productos.js';
 import { stripe } from './_stripe.js';
 import { leerStock } from './_stock.js';
 
@@ -38,6 +38,9 @@ export async function POST(request) {
     const stock = await leerStock();
     const origen = new URL(request.url).origin;
     const lineas = [];
+    // Todos los productos son toallas: el precio por mayor cuenta el pedido entero.
+    const toallas = items.reduce((n, i) => n + (Number(i.qty) || 0), 0);
+    const mayorista = toallas >= MAYORISTA.desde;
 
     for (const { id, qty } of items) {
       const p = PRODUCTOS[id];
@@ -58,7 +61,7 @@ export async function POST(request) {
         quantity: cantidad,
         price_data: {
           currency: MONEDA,
-          unit_amount: centavos(p.precio),
+          unit_amount: centavos(mayorista ? MAYORISTA.precio : p.precio),
           product: stock[id].producto,
         },
       });

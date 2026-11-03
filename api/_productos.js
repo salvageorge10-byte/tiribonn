@@ -23,6 +23,10 @@ export const ENVIOS = {
 /* Máximo de unidades por producto en un mismo pedido. */
 export const MAX_UNIDADES = 20;
 
+/* Precio por mayor: desde 5 toallas en el mismo pedido (se pueden
+   combinar diseños), todas pasan a US$30,00 cada una (03/11/2026). */
+export const MAYORISTA = { desde: 5, precio: 30 };
+
 /* Precios en la unidad de la moneda (45 = 45,00). */
 export const PRODUCTOS = {
   'toalla-rockcat':         { nombre: 'Toalla de Microfibra Rockcat',         precio: 45, img: 'images/toallas/rockcat-700.webp' },

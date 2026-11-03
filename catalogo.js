@@ -178,3 +178,11 @@ const ALL = [...PRODUCTS, ...TOWELS];
 const precio = (n) => `US$${n.toFixed(2)}`;
 const find = (id) => ALL.find((x) => x.id === id);
 
+/* Precio por mayor (pedido de la clienta, 03/11/2026): desde 5 toallas
+   en el mismo pedido, sumando diseños distintos, cada una sale US$30,00.
+   Lo mismo en api/_productos.js, que es el que cobra. */
+const MAYORISTA = { desde: 5, precio: 30 };
+const esMayorista = (toallas) => toallas >= MAYORISTA.desde;
+const precioUnidad = (p, toallas) =>
+  p.type === 'toalla' && esMayorista(toallas) ? MAYORISTA.precio : p.price;
+

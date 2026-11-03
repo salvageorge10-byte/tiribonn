@@ -318,6 +318,19 @@ section{ scroll-margin-top:calc(var(--hdr-h) + 10px); }
 .drawer-lines > div{ display:flex; justify-content:space-between; font-size:.88rem; color:var(--ink-70); padding:2px 0; }
 .drawer-lines dd{ margin:0; font-variant-numeric:tabular-nums; }
 .drawer-lines .drawer-sum{ color:var(--ink); font-size:.98rem; margin-top:4px; padding-top:6px; border-top:1px solid var(--ink-15); }
+.c-sub s{ color:var(--ink-50); }
+
+/* precio por mayor (desde 5 toallas) */
+.drawer-mayor{
+  margin:0 0 12px; padding:8px 12px; border-radius:8px; background:var(--paper-3);
+  font-size:.84rem; font-weight:700; line-height:1.4; color:var(--ink-70);
+}
+.drawer-mayor.is-on{ background:var(--lemon); color:var(--ink); }
+.drawer-mayor[hidden]{ display:none; }
+.tow-mayor{ margin:-12px 0 26px; max-width:34ch; color:var(--on-dark); font-weight:700; }
+.tow-mayor b{ color:var(--lemon); }
+.pdp-mayor{ margin-top:8px; font-size:.9rem; color:var(--ink-70); }
+.pdp-mayor b{ color:var(--navy); }
 
 /* stock */
 .c-stock{ margin-top:6px; font-size:.76rem; font-weight:700; color:var(--blue-d); }

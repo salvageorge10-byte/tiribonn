@@ -65,7 +65,12 @@ const totalEl = $('#cart-total');
 
 const saveCart = () => { try { localStorage.setItem(CART_KEY, JSON.stringify(cart)); } catch {} };
 const totalCount = () => cart.reduce((n, i) => n + i.qty, 0);
-const totalPrice = () => cart.reduce((n, i) => n + (find(i.id)?.price || 0) * i.qty, 0);
+const totalToallas = () => cart.reduce((n, i) => n + (find(i.id)?.type === 'toalla' ? i.qty : 0), 0);
+const totalPrice = () => {
+  const t = totalToallas();
+  return cart.reduce((n, i) => { const p = find(i.id); return n + (p ? precioUnidad(p, t) : 0) * i.qty; }, 0);
+};
+const mayorEl = $('#cart-mayor');
 
 function openCart() {
   drawer.classList.add('is-open');
@@ -92,7 +97,7 @@ function addToCart(id, qty = 1) {
   if (hit) hit.qty += suma;
   else cart.push({ id, name: p.full, color: p.color, img: p.img, thumb: imgChico(p), type: p.type, qty: suma });
   saveCart();
-  px('AddToCart', { content_ids: [id], content_name: p.full, content_type: 'product', contents: [{ id, quantity: suma }], value: (p.price || 0) * suma, currency: 'USD' });
+  px('AddToCart', { content_ids: [id], content_name: p.full, content_type: 'product', contents: [{ id, quantity: suma }], value: precioUnidad(p, totalToallas()) * suma, currency: 'USD' });
   renderCart();
   cartBtn.classList.add('is-bump');
   setTimeout(() => cartBtn.classList.remove('is-bump'), 600);
@@ -110,6 +115,8 @@ function changeQty(id, delta) {
 
 function renderCart() {
   const sinStock = cart.filter((i) => i.qty > quedan(i.id));
+  const toallas = totalToallas();
+  const mayor = esMayorista(toallas);
 
   if (!cart.length) {
     itemsEl.innerHTML = '<p class="c-empty">Todavía no has añadido nada al pedido.</p>';
@@ -125,7 +132,7 @@ function renderCart() {
         <img src="${i.thumb || i.img}" alt="" loading="lazy">
         <div>
           <h4>${i.name}</h4>
-          <p class="c-sub">Microfibra · ${precio(find(i.id).price)}</p>
+          <p class="c-sub">Microfibra · ${mayor ? `<s>${precio(find(i.id).price)}</s> ${precio(MAYORISTA.precio)}` : precio(find(i.id).price)}</p>
           <div class="stepper">
             <button type="button" data-minus aria-label="Restar una unidad de ${i.name}">−</button>
             <span>${i.qty}</span>
@@ -156,6 +163,12 @@ function renderCart() {
 
   const n = totalCount();
   const envio = envioElegido();
+  const faltan = MAYORISTA.desde - toallas;
+  mayorEl.hidden = !toallas;
+  mayorEl.classList.toggle('is-on', mayor);
+  mayorEl.textContent = mayor
+    ? `Precio por mayor aplicado: ${precio(MAYORISTA.precio)} cada toalla.`
+    : `Suma ${faltan === 1 ? '1 toalla más' : `${faltan} toallas más`} y cada una te sale ${precio(MAYORISTA.precio)}.`;
   countEl.textContent = n;
   sumEl.textContent = n === 1 ? '1 artículo' : `${n} artículos`;
   subEl.textContent = n ? precio(totalPrice()) : '';
@@ -234,7 +247,7 @@ payBtn.addEventListener('click', async () => {
     content_ids: cart.map((i) => i.id), content_type: 'product',
     contents: cart.map(({ id, qty }) => ({ id, quantity: qty })),
     num_items: cart.reduce((n, i) => n + i.qty, 0),
-    value: cart.reduce((n, i) => n + (find(i.id)?.price || 0) * i.qty, 0), currency: 'USD',
+    value: totalPrice(), currency: 'USD',
   });
 
   try {

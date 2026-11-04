@@ -33,6 +33,6 @@ export const PRODUCTOS = {
   'toalla-crazy-penguin':   { nombre: 'Toalla de Microfibra Crazy Penguin',   precio: 45, img: 'images/toallas/crazy-penguin-700.webp' },
   'toalla-iconos':          { nombre: 'Toalla de Microfibra Iconos',          precio: 45, img: 'images/toallas/iconos-700.webp' },
   'toalla-save-the-planet': { nombre: 'Toalla de Microfibra Save the Planet', precio: 45, img: 'images/toallas/save-the-planet-700.webp' },
-  'toalla-fondo-del-mar':   { nombre: 'Toalla de Microfibra Fondo del Mar',   precio: 49, img: 'images/toallas/fondo-del-mar-700.webp' },
-  'toalla-pulpo':           { nombre: 'Toalla de Microfibra Pulpo',           precio: 49, img: 'images/toallas/pulpo-700.webp' },
+  'toalla-fondo-del-mar':   { nombre: 'Toalla de Microfibra Fondo del Mar',   precio: 45, img: 'images/toallas/fondo-del-mar-700.webp' },
+  'toalla-pulpo':           { nombre: 'Toalla de Microfibra Pulpo',           precio: 45, img: 'images/toallas/pulpo-700.webp' },
 };

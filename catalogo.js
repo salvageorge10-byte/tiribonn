@@ -4,8 +4,8 @@
    ========================================================= */
 
 /* Número de WhatsApp donde llegan los pedidos, en formato internacional
-   y sin el "+" (España, +34 618 54 56 69). */
-const WHATSAPP_NUMBER = '34618545669';
+   y sin el "+" (España, +34 609 27 13 25; número propio de TIRIBON desde el 04/11/2026). */
+const WHATSAPP_NUMBER = '34609271325';
 
 const waLink = (msg) =>
   `${WHATSAPP_NUMBER ? `https://wa.me/${WHATSAPP_NUMBER}` : 'https://api.whatsapp.com/send'}?text=${encodeURIComponent(msg)}`;
@@ -124,7 +124,8 @@ const TOWELS = [
   {
     id: 'toalla-fondo-del-mar',
     type: 'toalla',
-    price: 49,
+    price: 45,
+    soon: true,
     name: 'Fondo del Mar',
     full: 'Toalla de Microfibra Fondo del Mar',
     color: 'Edición Lucas Baró',
@@ -135,7 +136,8 @@ const TOWELS = [
   {
     id: 'toalla-pulpo',
     type: 'toalla',
-    price: 49,
+    price: 45,
+    soon: true,
     name: 'Pulpo',
     full: 'Toalla de Microfibra Pulpo',
     color: 'Edición Lucas Baró',
@@ -170,7 +172,8 @@ const srcsetDe = (p) =>
 const ALL = [...PRODUCTS, ...TOWELS];
 
 /* Toallas: US$45,00 (cambiado a pedido el 29/09/2026; antes US$30,00);
-   Fondo del Mar y Pulpo, US$49,00 (agregadas el 07/10/2026).
+   Fondo del Mar y Pulpo: mismo precio que las demás y «soon» (04/11/2026;
+   antes US$49,00). Se ven con su precio pero todavía no se venden.
    Camisetas: marcadas «soon», se ven pero todavía no se venden.
    El cobro es con Stripe (api/checkout.js) y los precios que se cobran
    salen de api/_productos.js: un cambio de precio va en los dos lados.

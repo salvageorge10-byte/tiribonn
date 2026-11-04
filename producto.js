@@ -96,8 +96,11 @@ if (!prod) {
   $('#pdp-care').hidden = esToalla;
 
   /* ---- precio: las toallas tienen precio fijo; las camisetas aún no se venden ---- */
-  $('#pdp-price').textContent = prod.soon ? 'Próximamente' : precio(prod.price);
-  $('#pdp-price').classList.toggle('is-price', !prod.soon);
+  /* Toallas «soon» (Fondo del Mar, Pulpo): muestran el precio y debajo «Próximamente». */
+  const conPrecio = !prod.soon || esToalla;
+  $('#pdp-price').textContent = conPrecio ? precio(prod.price) : 'Próximamente';
+  $('#pdp-price').classList.toggle('is-price', conPrecio);
+  if (prod.soon && esToalla) $('#pdp-price').insertAdjacentHTML('afterend', '<p class="prod-soon">Próximamente</p>');
   if (prod.soon) $('.pdp-buy').hidden = true;
   else $('#pdp-price').insertAdjacentHTML('afterend', `<p class="pdp-left" data-stock-for="${prod.id}"></p>` +
     (esToalla ? `<p class="pdp-mayor">Por mayor: desde ${MAYORISTA.desde} toallas, <b>${precio(MAYORISTA.precio)}</b> cada una. Puedes combinar diseños.</p>` : ''));

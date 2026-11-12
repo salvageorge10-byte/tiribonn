@@ -734,6 +734,11 @@ section{ scroll-margin-top:calc(var(--hdr-h) + 10px); }
   font-size:.82rem; color:var(--ink-70);
 }
 .foot b{ color:var(--navy); }
+.foot-redes{ display:flex; flex-wrap:wrap; gap:6px 20px; }
+.foot-redes a, .end-base a{ font-weight:600; text-decoration:underline; text-underline-offset:3px; }
+.foot-redes a{ color:var(--navy); }
+.end-base a{ color:var(--lemon); }
+.foot-redes a:hover, .end-base a:hover{ text-decoration-thickness:2px; }
 
 /* ---------------- PORTADA: RESPONSIVE ---------------- */
 @media (max-width:1180px){
